@@ -4,7 +4,8 @@ var router = express.Router();
 const db = require('../../connection');
 
 router.get('/', async (req, res) => {
-  res.send("hello")
+  res.send(req.headers.host);
+  return;
 });
 router.get('/category', async (req, res) => {
   const category = await db.query(`select * from Category`);
