@@ -5,6 +5,11 @@
 yarn install
 ```
 
+### Run web on local
+```
+yarn run dev
+```
+
 ### Compiles and hot-reloads for development
 ```
 yarn serve
