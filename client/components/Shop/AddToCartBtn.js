@@ -13,7 +13,7 @@ const AddToCartBtn = ({ id }) => {
       type: "ADD_TO_CART",
       id,
     });
-    // addToast("Cart Added Successfully", { appearance: "success" });
+    addToast("Chọn món thành công", { appearance: "success" });
   };
   return (
     <div

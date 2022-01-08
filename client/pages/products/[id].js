@@ -8,16 +8,20 @@ import * as Icon from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
+import axios from 'axios'
 
-const ProductDetails = () => {
+const ProductDetails = ({productsData}) => {
   const { addToast } = useToasts();
   const dispatch = useDispatch();
   const router = useRouter();
   const productId = router.query.id;
-  const product = useSelector((state) =>
-    state.products.find((item) => item.id === productId)
-  );
-
+  console.log("productId", productId)
+  // const product = useSelector((state) =>
+  //   state.products.find((item) => item.id === productId)
+  // );
+  console.log(productsData)
+  const product = productsData.find((item) => item.id == productId)
+  console.log("runrun ", product)
   const [qty, setQty] = React.useState(1);
 
   const increment = () => {
@@ -40,7 +44,7 @@ const ProductDetails = () => {
   return (
     <>
       <Header />
-      <PageBanner pageTitle={product && product.name} />
+      <PageBanner pageTitle={product && product.title} />
 
       <div className="shop-details-area ptb-80">
         <div className="container">
@@ -48,16 +52,16 @@ const ProductDetails = () => {
             <div className="col-lg-5">
               {/* <ProductSlider images={product && product.images} /> */}
               <img
-                src={product && product.image}
+                src={product && product.thumbnail}
                 alt="tea"
               ></img>
             </div>
 
             <div className="col-lg-7">
               <div className="products-details">
-                <h3>{product && product.name}</h3>
+                <h3>{product && product.title}</h3>
 
-                <div className="price">${product && product.price}</div>
+                <div className="price">{product && product.price} VND</div>
 
                 <ul className="rating">
                   <li>
@@ -77,11 +81,11 @@ const ProductDetails = () => {
                   </li>
                 </ul>
 
-                <p>{product && product.desc}</p>
+                <p>{product && product.description}</p>
 
-                <div className="availability">
+                {/* <div className="availability">
                   Tình trạng: <span>{product && product.availability}</span>
-                </div>
+                </div> */}
                 <form onSubmit={(e) => e.preventDefault()}>
                   <div className="quantity d-flex align-items-center">
                     <span>Số lượng:</span>
@@ -162,7 +166,7 @@ const ProductDetails = () => {
 
             <div className="col-lg-12 col-md-12 product-desc">
               {/* <ProductsDetailsTabs /> */}
-              <p>{product && product.desc}</p>
+              <p>{product && product.description}</p>
             </div>
           </div>
         </div>
@@ -174,3 +178,11 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
+
+ProductDetails.getInitialProps = async ctx => {
+  const url = 'http://localhost:3000/api/product'
+  const req = await axios.get(url)
+  return {
+      productsData: req.data
+  }
+}
