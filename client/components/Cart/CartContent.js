@@ -33,7 +33,7 @@ const CartContent = () => {
 
   return (
     <>
-      <PageBanner pageTitle="Giỏ hàng"/>
+      <PageBanner pageTitle="Giỏ hàng" />
       <div className="cart-table table-responsive ptb-80">
         <table className="table table-bordered">
           <thead>
@@ -53,14 +53,14 @@ const CartContent = () => {
                   <td className="product-thumbnail">
                     <Link href="/product-details">
                       <a>
-                        <img src={crt.image} alt="item" />
+                        <img src={crt.thumbnail} alt="item" />
                       </a>
                     </Link>
                   </td>
 
                   <td className="product-name">
                     <Link href="/product-details">
-                      <a>{crt.name}</a>
+                      <a>{crt.title}</a>
                     </Link>
                   </td>
 

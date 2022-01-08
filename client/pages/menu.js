@@ -3,24 +3,25 @@ import Link from "next/link";
 import PageBanner from "../components/Layout/PageBanner";
 import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
+import axios from "axios"
 import ProductCard from "../components/Shop/ProductCard";
 import Filter from "../components/Shop/Filter"
 
 const Menu = () => {
 
-//   React.useEffect(() => {
-//     let elementId = document.getElementById('category')
-//     document.addEventListener('scroll', () => {
-//         if (window.scrollY < 500) {
-//             elementId.classList.remove('is-bottom')
-//             elementId.classList.add('is-stop')
-//         } else {
-//             elementId.classList.remove('is-stop')
-//             elementId.classList.add('is-bottom')
-//         }
-//     })
-//     window.scrollTo(0, 0)
-// })
+  //   React.useEffect(() => {
+  //     let elementId = document.getElementById('category')
+  //     document.addEventListener('scroll', () => {
+  //         if (window.scrollY < 500) {
+  //             elementId.classList.remove('is-bottom')
+  //             elementId.classList.add('is-stop')
+  //         } else {
+  //             elementId.classList.remove('is-stop')
+  //             elementId.classList.add('is-bottom')
+  //         }
+  //     })
+  //     window.scrollTo(0, 0)
+  // })
 
   return (
     <>
@@ -28,7 +29,7 @@ const Menu = () => {
       <PageBanner pageTitle="Menu" />
       <div className="container">
         {/* <div className="row"> */}
-          {/* <div className="col-lg-2 pt-80">
+        {/* <div className="col-lg-2 pt-80">
             <div id="category">
               <ul className="category-list">
                 <li>
@@ -64,10 +65,10 @@ const Menu = () => {
               </ul>
             </div>
           </div> */}
-          {/* <div className="col-lg-10 menu-products"> */}
-          <Filter />
-            <ProductCard />
-          {/* </div> */}
+        {/* <div className="col-lg-10 menu-products"> */}
+        <Filter />
+        <ProductCard />
+        {/* </div> */}
         {/* </div> */}
       </div>
 
@@ -75,5 +76,13 @@ const Menu = () => {
     </>
   );
 };
+
+// Menu.getInitialProps = async ctx => {
+//   const url = 'http://localhost:3000/api/product'
+//   const req = await axios.get(url)
+//   return {
+//     productsData: req.data
+//   }
+// }
 
 export default Menu;

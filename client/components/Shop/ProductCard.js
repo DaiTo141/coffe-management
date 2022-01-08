@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import AddToCartBtn from "./AddToCartBtn";
 import Filter from "./Filter";
 
-const ProductCard = ({products}) => {
-  // const products = useSelector((state) => state.products);
+const ProductCard = () => {
+  const products = useSelector((state) => state.products);
 
   return (
     <div className="shop-area pb-80">

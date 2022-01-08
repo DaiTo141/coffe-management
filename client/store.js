@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { productsData } from "./products";
+// import { productsData } from "./products";
 
 let store;
 
 const initialState = {
-  products: productsData,
+  products: [],
   cart: [],
   total: 0,
 };
@@ -15,11 +15,17 @@ console.log("in", initialState);
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case "GET_PRODUCT_DATA":
+      state.products = action.products
+      console.log(state)
+      return {
+        ...state
+      }
     case "ADD_TO_CART":
       //Tra ve san pham do o trong products
-      let addedItem = state.products.find((item) => item.id === action.id);
+      let addedItem = state.products.find((item) => item.id == action.id);
       //Tra ve san pham do trong gio hang
-      let existed_item = state.cart.find((item) => action.id === item.id);
+      let existed_item = state.cart.find((item) => action.id == item.id);
 
       //Tra ve mot initialState moi voi cart va total da duoc cap nhat
       if (existed_item) {
@@ -69,9 +75,11 @@ const reducer = (state = initialState, action) => {
       }
 
     case "ADD_QUANTITY_WITH_NUMBER":
-      let addedItemD = state.products.find((item) => item.id === action.id);
+      console.log(state)
+      let addedItemD = state.products.find((item) => item.id == +action.id);
+      console.log(`addItemD`, state.products)
       //check if the action id exists in the addedItems
-      let existed_itemd = state.cart.find((item) => action.id === item.id);
+      let existed_itemd = state.cart.find((item) => +action.id == item.id);
       if (existed_itemd) {
         addedItemD.quantity += action.qty;
         return {

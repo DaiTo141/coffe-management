@@ -135,7 +135,7 @@ const Checkout = () => {
                           <tr key={crt.id}>
                             <td className="product-name">
                               <span className="subtotal-amount">
-                                {crt.name}
+                                {crt.title}
                               </span>
                             </td>
 

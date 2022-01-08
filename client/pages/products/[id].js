@@ -10,18 +10,16 @@ import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
 import axios from 'axios'
 
-const ProductDetails = ({productsData}) => {
+const ProductDetails = ({ productsData }) => {
   const { addToast } = useToasts();
   const dispatch = useDispatch();
   const router = useRouter();
   const productId = router.query.id;
-  console.log("productId", productId)
-  // const product = useSelector((state) =>
-  //   state.products.find((item) => item.id === productId)
-  // );
-  console.log(productsData)
-  const product = productsData.find((item) => item.id == productId)
-  console.log("runrun ", product)
+  const product = useSelector((state) => {
+    return state.products.find((item) => item.id == productId)
+  }
+
+  );
   const [qty, setQty] = React.useState(1);
 
   const increment = () => {
@@ -178,11 +176,3 @@ const ProductDetails = ({productsData}) => {
 };
 
 export default ProductDetails;
-
-ProductDetails.getInitialProps = async ctx => {
-  const url = 'http://localhost:3000/api/product'
-  const req = await axios.get(url)
-  return {
-      productsData: req.data
-  }
-}

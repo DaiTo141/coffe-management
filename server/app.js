@@ -35,7 +35,7 @@ function authenticateToken(req, res, next) {
 }
 
 // catch 404 and forward to error handler
-app.all('*', authenticateToken)
+// app.all('*', authenticateToken)
 app.use('/api', indexRouter);
 app.use('/authorization', loginRouter)
 app.use(function (req, res, next) {
