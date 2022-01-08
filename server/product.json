@@ -1,0 +1,96 @@
+{
+    "Cà phê": [
+    {
+        "title": "Cà Phê Sữa Đá",
+        "thumbnail": "https://product.hstatic.net/1000075078/product/ca-phe-sua-da_b00c53d18cd84144a164790323106a2f_master.jpg",
+        "description": "Cà phê được pha phin truyền thống kết hợp với sữa đặc tạo nên hương vị đậm đà, hài hòa giữa vị ngọt đầu lưỡi và vị đắng thanh thoát nơi hậu vị.",
+        "price": 29000
+    },
+    {
+        "title": "Bạc Sỉu Đá",
+        "thumbnail": "https://product.hstatic.net/1000075078/product/bac-siu-da_9bf82220a1a54847aa7357de541e7552_master.jpg",
+        "description": "Bạc sỉu chính là \"Ly sữa trắng kèm một chút cà phê\". Thức uống này rất phù hợp những ai vừa muốn trải nghiệm chút vị đắng của cà phê vừa muốn thưởng thức vị ngọt béo ngậy từ sữa.",
+        "price": 29000
+    },
+    {
+        "title": "Cà Phê Đen Đá",
+        "thumbnail": "https://product.hstatic.net/1000075078/product/ca-phe-den-da_6e25255ae31c4f3bbbb502f77e2c100d_master.jpg",
+        "description": "Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng.",
+        "price": 29000
+    },
+    {
+        "title": "Bạc Sỉu Nóng",
+        "thumbnail": "https://product.hstatic.net/1000075078/product/bac-xiu-nong_fa679e04523c4f138354e852745b223e_master.jpg",
+        "description": "Bạc sỉu chính là \"Ly sữa trắng kèm một chút cà phê\". Thức uống này rất phù hợp những ai vừa muốn trải nghiệm chút vị đắng của cà phê vừa muốn thưởng thức vị ngọt béo ngậy từ sữa.",
+        "price": 35000
+    },
+    {
+        "title": "Cà Phê Đen Nóng",
+        "thumbnail": "https://product.hstatic.net/1000075078/product/ca-phe-den-nong_34c4834cd4094d7e8659ad8d3c4fa6fc_master.jpg",
+        "description": "Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng.",
+        "price": 35000
+    },
+    {
+        "title": "Cà phê Sữa Nóng",
+        "thumbnail": "https://product.hstatic.net/1000075078/product/ca-phe-sua-nong_0beecc27870549a5bf016dc6a8fac60e_master.jpg",
+        "description": "Cà phê được pha phin truyền thống kết hợp với sữa đặc tạo nên hương vị đậm đà, hài hòa giữa vị ngọt đầu lưỡi và vị đắng thanh thoát nơi hậu vị.",
+        "price": 35000
+    },
+    {
+        "title": "Cà Phê Sữa Đá Chai Fresh 250ml",
+        "thumbnail": "https://product.hstatic.net/1000075078/product/bottlecfsd_496652_400x400_c673691fc1de4b359ee22dcf0c9c614f_master.jpg",
+        "description": "Vẫn là hương vị cà phê sữa đậm đà truyền thống từ cà phê Đắk Lắk nhưng khoác lên mình một chiếc áo mới tiện lợi hơn, tiết kiệm hơn giúp bạn tận hưởng một ngày dài trọn vẹn.",
+        "price": 79000
+    },
+    {
+        "title": "Cà Phê Sữa Đá Hòa Tan Hộp 10 gói",
+        "thumbnail": "https://product.hstatic.net/1000075078/product/cpsd-3in1_971575_400x400_08af198ffd3b4107a1843a2e44e3e8be_master.jpg",
+        "description": "Thật dễ dàng để bắt đầu ngày mới với tách cà phê sữa đá sóng sánh, thơm ngon như cà phê pha phin. Vị đắng thanh của cà phê hoà quyện với vị ngọt béo của sữa, giúp bạn luôn tỉnh táo và hứng khởi cho ngày làm việc thật hiệu quả.",
+        "price": 44000
+    }
+    ],
+    "Trà": [
+        {
+            "title": "Giftset Trà Tearoma",
+            "thumbnail": "https://product.hstatic.net/1000075078/product/giftset-tra-tearoma_5bb77a734c2447839a593f18ef27730b_master.jpg",
+            "description": "Hộp quà tặng với 4 hộp trà túi lọc Tearoma các loại là món quà thật ý nghĩa cho những người thân yêu trong dịp này.",
+            "price": 169000
+        },
+        {
+            "title": "Trà Đào Cam Sả Đá",
+            "thumbnail": "https://product.hstatic.net/1000075078/product/tra-dao-cam-xa_668678_400x400_207c526c987c4026877ebae748c62afd_large.jpg",
+            "description": "Vị thanh ngọt của đào Hy Lạp, vị chua dịu của Cam Vàng nguyên vỏ, vị chát của trà đen tươi được ủ mới mỗi 4 tiếng, cùng hương thơm nồng đặc trưng của sả chính là điểm sáng làm nên sức hấp dẫn của thức uống này.",
+            "price": 45000
+        },
+        {
+            "title": "Trà Đào Cam Sả Nóng",
+            "thumbnail": "https://product.hstatic.net/1000075078/product/tdcs-nong_288997_400x400_75f2d80e0db2442e9ab752689cbf1001_master.jpg",
+            "description": "Vị thanh ngọt của đào Hy Lạp, vị chua dịu của Cam Vàng nguyên vỏ, vị chát của trà đen tươi được ủ mới mỗi 4 tiếng, cùng hương thơm nồng đặc trưng của sả chính là điểm sáng làm nên sức hấp dẫn của thức uống này.",
+            "price": 52000
+        },
+        {
+            "title": "Trà Hạt Sen Đá",
+            "thumbnail": "https://product.hstatic.net/1000075078/product/tra-sen_905594_400x400_c82fd1b3786d45f380cf4c15e9af7ab9_master.jpg",
+            "description": "Nền trà oolong hảo hạng kết hợp cùng hạt sen tươi, bùi bùi và lớp foam cheese béo ngậy. Trà hạt sen là thức uống thanh mát, nhẹ nhàng phù hợp cho cả buổi sáng và chiều tối.",
+            "price": 45000
+        },
+        {
+            "title": "Trà Hạt Sen Nóng",
+            "thumbnail": "https://product.hstatic.net/1000075078/product/tra-sen-nong_025153_400x400_b7b0ec5844c546d2a6d139a65be8aa0a_master.jpg",
+            "description": "Nền trà oolong hảo hạng kết hợp cùng hạt sen tươi, bùi bùi và lớp foam cheese béo ngậy. Trà hạt sen là thức uống thanh mát, nhẹ nhàng phù hợp cho cả buổi sáng và chiều tối.",
+            "price": 52000
+        },
+        {
+            "title": "Trà Đào Cam Sả Chai Fresh 500ml",
+            "thumbnail": "https://product.hstatic.net/1000075078/product/bottle_tradao_836487_400x400_82de6433bf5744c0a5dd9108d99191e1_master.jpg",
+            "description": "Với phiên bản chai 500ml, thức uống “quốc dân” mang một diện mạo tươi mới, tiện lợi và vẫn giữ nguyên vị thanh ngọt của đào Hy Lạp, vị chua dịu của Cam Vàng nguyên vỏ và vị trà đen thơm lừng ly Trà đào Cam sả nguyên bản.",
+            "price": 109000
+        },
+        {
+            "title": "Trà Đen Macchiato",
+            "thumbnail": "https://product.hstatic.net/1000075078/product/tra-den-matchiato_430281_400x400_88f47618a6b84c2d9ad633d3298fb390_master.jpg",
+            "description": "Trà đen được ủ mới mỗi ngày, giữ nguyên được vị chát mạnh mẽ đặc trưng của lá trà, phủ bên trên là lớp Macchiato \"homemade\" bồng bềnh quyến rũ vị phô mai mặn mặn mà béo béo.",
+            "price": 50000
+        }
+    ]
+}
