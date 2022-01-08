@@ -1,13 +1,25 @@
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import Header from '../components/Layout/Header'
-import Footer from '../components/Layout/Footer'
+import React from "react";
+import Header from "../components/Layout/Header";
+import Footer from "../components/Layout/Footer";
+import PageBanner from "../components/Layout/PageBanner";
+import ProductCard from "../components/Shop/ProductCard";
+import MainBanner from "../components/Home/Mainbanner";
+import HotCombo from "../components/Home/HotCombo";
 
-export default function Home() {
+const Home = () => {
   return (
-    <div>
+    <>
       <Header />
+
+      {/* <PageBanner pageTitle="Products" />  */}
+      <MainBanner />
+      <div className="pb-80"></div>
+      <ProductCard />
+      <HotCombo />
+
       <Footer />
-    </div>
-  )
-}
+    </>
+  );
+};
+
+export default Home;
