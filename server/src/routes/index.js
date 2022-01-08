@@ -42,6 +42,7 @@ router.get('/category', async (req, res) => {
   return res.send(category.recordsets[0]);
 });
 router.get('/product', async (req, res) => {
+  console.log("run run run")
   const product = await db.query(`select * from Product`);
   return res.send(product.recordsets[0]);
 });
