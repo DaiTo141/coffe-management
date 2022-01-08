@@ -10,7 +10,7 @@ dotenv.config({ path: './.env' });
 
 var indexRouter = require('./src/routes/index');
 var loginRouter = require('./src/routes/login')
-const privatePaths = ['/authorization']
+const privatePaths = ['authorization']
 
 var app = express();
 app.use(logger('dev'));
@@ -21,12 +21,10 @@ app.use(cookieParser());
 
 function authenticateToken(req, res, next) {
   if (privatePaths.filter(p => {
-    console.log(req.path.substring(4))
-    return req.path.substring(4).indexOf(p) >= 0
-  }).length == 0) return next();
+    return req.path.indexOf(p) >= 0
+  }).length != 0) return next();
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
-  console.log(`token`, token)
   if (token == null) return res.sendStatus(401)
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
     console.log(err)
@@ -37,7 +35,7 @@ function authenticateToken(req, res, next) {
 }
 
 // catch 404 and forward to error handler
-// app.all('*', authenticateToken)
+app.all('*', authenticateToken)
 app.use('/api', indexRouter);
 app.use('/authorization', loginRouter)
 app.use(function (req, res, next) {
