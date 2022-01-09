@@ -59,12 +59,12 @@ const Navbar = () => {
             <div className={classOne} id="navbarSupportedContent">
               <ul className="navbar-nav ms-auto">
                 <li className="nav-item">
-                  <Link href="#">
-                    <a onClick={(e) => e.preventDefault()} className="nav-link">
-                      Menu <Icon.ChevronDown />
+                  <Link href="/menu">
+                    <a onClick={toggleNavbar} className="nav-link">
+                      Menu
                     </a>
                   </Link>
-                  <ul className="dropdown-menu">
+                  {/* <ul className="dropdown-menu">
                     <li className="nav-item">
                       <Link href="/menu" activeClassName="active">
                         <a onClick={toggleNavbar} className="nav-link">
@@ -79,56 +79,15 @@ const Navbar = () => {
                           Cà phê
                         </a>
                       </Link>
-                      {/* <ul className="dropdown-menu">
-                        <li className="nav-item">
-                          <Link href="#" activeClassName="active">
-                            <a onClick={toggleNavbar} className="nav-link">
-                              Cà phê Việt Nam
-                            </a>
-                          </Link>
-                        </li>
+                      
+                    </li> */}
 
-                        <li className="nav-item">
-                          <Link href="#" activeClassName="active">
-                            <a onClick={toggleNavbar} className="nav-link">
-                              Cà phê máy
-                            </a>
-                          </Link>
-                        </li>
-
-                        <li className="nav-item">
-                          <Link href="#" activeClassName="active">
-                            <a onClick={toggleNavbar} className="nav-link">
-                              Cold Brew
-                            </a>
-                          </Link>
-                        </li>
-                      </ul> */}
-                    </li>
-
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                       <Link href="#" activeClassName="active">
                         <a onClick={toggleNavbar} className="nav-link">
                           Trà
                         </a>
                       </Link>
-                      {/* <ul className="dropdown-menu">
-                        <li className="nav-item">
-                          <Link href="#" activeClassName="active">
-                            <a onClick={toggleNavbar} className="nav-link">
-                              Trà trái cây
-                            </a>
-                          </Link>
-                        </li>
-
-                        <li className="nav-item">
-                          <Link href="#" activeClassName="active">
-                            <a onClick={toggleNavbar} className="nav-link">
-                              Trà sữa Macchiato
-                            </a>
-                          </Link>
-                        </li>
-                      </ul> */}
                     </li>
                     <li className="nav-item">
                       <Link href="/about-3" activeClassName="active">
@@ -144,7 +103,7 @@ const Navbar = () => {
                         </a>
                       </Link>
                     </li>
-                  </ul>
+                  </ul> */}
                 </li>
                 <li className="nav-item">
                   <Link activeClassName="active" href="/coming-soon">

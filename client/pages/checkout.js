@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
 import PageBanner from "../components/Layout/PageBanner";
@@ -6,6 +6,21 @@ import * as Icon from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import axios from "axios";
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal);
+
+const alertContent = () => {
+  MySwal.fire({
+    title: "Đặt hàng thành công",
+    text: "Cảm ơn bạn đã đặt hàng!",
+    icon: "success",
+    timerProgressBar: true,
+    showConfirmButton: true,
+  });
+};
 
 const Checkout = () => {
   const router = useRouter();
@@ -13,23 +28,33 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const total = useSelector((state) => state.total);
-  // console.log(cart)
-
-  const removeItem = (pId) => {
-    dispatch({
-      type: "REMOVE_ITEM",
-      id: pId,
-    });
-    addToast("Cart Removed Successfully", { appearance: "error" });
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const reset = () => {
     dispatch({
       type: "RESET",
     });
-    // addToast('Thanks for your order.', { appearance: 'success' })
-    router.push("/checkout");
+    router.push("/");
   };
+
+  const onSubmit = (e) => {
+    console.log(e);
+    alertContent();
+    reset();
+  };
+
+  let totalmoney = 20000;
+
+  const countTotal = () => {
+    cart.forEach((crt) => {
+      totalmoney += crt.quantity * crt.price;
+    });
+  };
+  countTotal();
 
   return (
     <>
@@ -39,20 +64,11 @@ const Checkout = () => {
 
       <div className="checkout-area ptb-80">
         <div className="container">
-          {/* <div className="row">
-                        <div className="col-lg-12 col-md-12">
-                            <div className="user-actions">
-                                <Icon.Edit />
-                                <span>Returning customer? <a href="#">Click here to login</a></span>
-                            </div>
-                        </div>
-                    </div> */}
-
-          <form>
+          <form id="info-form" onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
               <div className="col-lg-6 col-md-12">
                 <div className="billing-details">
-                  <h3 className="title">Billing Details</h3>
+                  <h3 className="title">Thông tin khách hàng</h3>
 
                   <div className="row">
                     <div className="col-lg-12 col-md-12">
@@ -60,7 +76,18 @@ const Checkout = () => {
                         <label>
                           Tên<span className="required">*</span>
                         </label>
-                        <input type="text" className="form-control" />
+                        <input
+                          type="text"
+                          name="name"
+                          className="form-control"
+                          {...register("name", { required: true })}
+                        />
+                        <div
+                          className="invalid-feedback"
+                          style={{ display: "block" }}
+                        >
+                          {errors.name && "Bạn chưa điền tên."}
+                        </div>
                       </div>
                     </div>
 
@@ -69,7 +96,18 @@ const Checkout = () => {
                         <label>
                           Quận <span className="required">*</span>
                         </label>
-                        <input type="text" className="form-control" />
+                        <input
+                          type="text"
+                          name="district"
+                          className="form-control"
+                          {...register("district", { required: true })}
+                        />
+                        <div
+                          className="invalid-feedback"
+                          style={{ display: "block" }}
+                        >
+                          {errors.district && "Bạn chưa điền quận."}
+                        </div>
                       </div>
                     </div>
 
@@ -78,7 +116,18 @@ const Checkout = () => {
                         <label>
                           Phường<span className="required">*</span>
                         </label>
-                        <input type="text" className="form-control" />
+                        <input
+                          type="text"
+                          name="ward"
+                          className="form-control"
+                          {...register("ward", { required: true })}
+                        />
+                        <div
+                          className="invalid-feedback"
+                          style={{ display: "block" }}
+                        >
+                          {errors.ward && "Bạn chưa điền phường."}
+                        </div>
                       </div>
                     </div>
 
@@ -87,16 +136,44 @@ const Checkout = () => {
                         <label>
                           Địa chỉ <span className="required">*</span>
                         </label>
-                        <input type="text" className="form-control" />
+                        <input
+                          type="text"
+                          name="street"
+                          className="form-control"
+                          {...register("street", { required: true })}
+                        />
+                        <div
+                          className="invalid-feedback"
+                          style={{ display: "block" }}
+                        >
+                          {errors.street &&
+                            "Bạn chưa điền địa chỉ (tên đường, số nhà, ...)"}
+                        </div>
                       </div>
                     </div>
 
-                    <div className="col-lg-6 col-md-6">
+                    <div className="col-lg-12 col-md-12">
                       <div className="form-group">
                         <label>
                           Số điện thoại <span className="required">*</span>
                         </label>
-                        <input type="text" className="form-control" />
+                        <input
+                          type="text"
+                          name="phone"
+                          id="number"
+                          className="form-control"
+                          {...register("phone", {
+                            required: true,
+                            pattern: /^[0-9]+$/i,
+                          })}
+                        />
+                        <div
+                          className="invalid-feedback"
+                          style={{ display: "block" }}
+                        >
+                          {errors.phone &&
+                            "Bạn chưa điền số điện thoại hoặc số điện thoại không hợp lệ."}
+                        </div>
                       </div>
                     </div>
 
@@ -124,9 +201,9 @@ const Checkout = () => {
                     <table className="table table-bordered">
                       <thead>
                         <tr>
-                          <th scope="col">Product Name</th>
+                          <th scope="col">Tên</th>
                           <th scope="col">Số lượng</th>
-                          <th scope="col">Tổng cộng</th>
+                          <th scope="col">Số tiền</th>
                         </tr>
                       </thead>
 
@@ -147,13 +224,21 @@ const Checkout = () => {
 
                             <td className="product-subtotal">
                               <span className="subtotal-amount">
-                                ${(crt.quantity * crt.price).toFixed(2)}
+                                {crt.quantity * crt.price} VNĐ
                               </span>
                             </td>
                           </tr>
                         ))}
+                        <tr>
+                          <td>Phí giao hàng</td>
+                          <td></td>
+                          <td>20000 VNĐ</td>
+                        </tr>
                       </tbody>
                     </table>
+                    <div className="checkout-total">
+                      <p>Tổng cộng: {totalmoney} VNĐ</p>
+                    </div>
                   </div>
 
                   <div className="payment-method">
@@ -173,10 +258,14 @@ const Checkout = () => {
                       <label htmlFor="paypal">Chuyển khoản</label>
                     </p> */}
                   </div>
-
-                  <a href="#" className="btn btn-primary order-btn">
-                    Đặt hàng
-                  </a>
+                  <div className="col-lg-12 col-md-12">
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                    >
+                      Đặt hàng
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

@@ -3528,6 +3528,16 @@ Menu CSS
 /*================================================
 Checkout CSS
 =================================================*/
+.checkout-total {
+  margin-top: 50px;
+
+}
+
+.checkout-total p {
+  color: #000 !important;
+  font-size: 18px;
+}
+
 .user-actions {
   -webkit-box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.08);
   box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.08);

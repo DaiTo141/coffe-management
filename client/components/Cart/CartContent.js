@@ -65,7 +65,7 @@ const CartContent = () => {
                   </td>
 
                   <td className="product-price">
-                    <span className="unit-amount">${crt.price}</span>
+                    <span className="unit-amount">{crt.price} VNĐ</span>
                   </td>
 
                   <td className="product-quantity">
@@ -74,7 +74,7 @@ const CartContent = () => {
 
                   <td className="product-subtotal">
                     <span className="subtotal-amount">
-                      ${(crt.quantity * crt.price).toFixed(2)}
+                      {(crt.quantity * crt.price)} VNĐ
                     </span>
 
                     <a
@@ -112,11 +112,6 @@ const CartContent = () => {
             </div>
           </div>
 
-          {/* <div className="col-lg-5 col-md-5 col-sm-5 text-right">
-            <Link href="/cart">
-              <a className="btn btn-light">Cập nhật giỏ hàng</a>
-            </Link>
-          </div> */}
         </div>
       </div>
 
@@ -125,15 +120,15 @@ const CartContent = () => {
 
         <ul>
           <li>
-            Số tiền <span>${total.toFixed(2)}</span>
+            Số tiền <span>{total} VNĐ</span>
           </li>
           <li>
-            Phí giao hàng <span>$10.00</span>
+            Phí giao hàng <span>20000 VNĐ</span>
           </li>
           <li>
             Tổng cộng{" "}
             <span>
-              <b>${(total + 10).toFixed(2)}</b>
+              <b>{(total + 20000)} VNĐ</b>
             </span>
           </li>
         </ul>
