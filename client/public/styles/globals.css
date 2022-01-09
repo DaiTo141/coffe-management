@@ -488,7 +488,15 @@ Footer CSS
 }
 
 .single-footer-widget .logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 20px;
+}
+
+.single-footer-widget .logo img {
+  max-height: 50px;
 }
 
 .single-footer-widget .logo a {
@@ -2796,7 +2804,7 @@ Agency Portfolio Main Banner CSS
 }
 
 .agency-portfolio-main-banner.portfolio-banner-bg3 {
-  background-image: url(https://file.hstatic.net/1000075078/file/web_hara_giam20_tch_6cd20490c0c54191b5b2313a86fb6fc6.jpeg);
+  background-image: url(https://file.hstatic.net/1000075078/file/desktop-mua-1-tang-1-latte-tao-le-que-tch_98bc79cc51d3459cb9b6d94d5cff6236.jpeg);
 }
 
 .portfolio-banner-content {

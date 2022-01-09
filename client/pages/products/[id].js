@@ -7,7 +7,7 @@ import ProductsDetailsTabs from "../../components/Shop/ProductsDetailsTabs";
 import * as Icon from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { useToasts } from "react-toast-notifications";
+import { ToastConsumer, useToasts } from "react-toast-notifications";
 import axios from 'axios'
 
 const ProductDetails = ({ productsData }) => {
@@ -36,7 +36,7 @@ const ProductDetails = ({ productsData }) => {
       id: productId,
       qty: qty,
     });
-    addToast("Cart Added Successfully", { appearance: "success" });
+    addToast("Chọn món thành công", { appearance: "success"});
   };
 
   return (

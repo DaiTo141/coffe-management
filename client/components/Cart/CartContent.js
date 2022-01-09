@@ -20,7 +20,7 @@ const CartContent = () => {
       type: "REMOVE_ITEM",
       id: pId,
     });
-    addToast("Cart Removed Successfully", { appearance: "error" });
+    addToast("Xóa sản phẩm thành công", { appearance: "error" });
   };
 
   const reset = () => {

@@ -29,14 +29,14 @@ const ProductCard = () => {
                       <a>{product.title}</a>
                     </Link>
                   </h3>
-                  <span className="product-price">${product.price}</span>
+                  <span className="product-price">{product.price} VNĐ</span>
 
                 </div>
               </div>
             </div>
           ))}
 
-          <div className="col-lg-12 col-md-12 col-sm-12">
+          {/* <div className="col-lg-12 col-md-12 col-sm-12">
             <div className="pagination-area">
               <nav aria-label="Page navigation">
                 <ul className="pagination justify-content-center">
@@ -72,7 +72,7 @@ const ProductCard = () => {
                 </ul>
               </nav>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

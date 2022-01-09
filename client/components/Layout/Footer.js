@@ -1,139 +1,130 @@
-import React from 'react';
-import Link from 'next/link';
-import * as Icon from 'react-feather';
+import React from "react";
+import Link from "next/link";
+import * as Icon from "react-feather";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
 
-    const currentYear = new Date().getFullYear();
-
-    return (
-        <footer className="footer-area bg-f7fafd">
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-3 col-md-6">
-                        <div className="single-footer-widget">
-                            <div className="logo">
-                                {/* <Link href="/it-startup">
-                                    <a>
-                                        <img src="/images/logo.png" alt="logo" />
-                                    </a>
-                                </Link> */}
-                            </div>
-                            <p>Friends Coffee sẽ là nơi mọi người xích lại gần nhau, đề cao giá trị kết nối con người và sẻ chia thân tình bên những tách cà phê, ly trà đượm hương, truyền cảm hứng về lối sống hiện đại.</p>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-3 col-md-6">
-                        <div className="single-footer-widget pl-5">
-                            <h3>Company</h3>
-                            <ul className="list">
-                                <li>
-                                    <Link href="/about-1">
-                                        <a>About Us</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/services-1">
-                                        <a>Services</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/features">
-                                        <a>Features</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/pricing">
-                                        <a>Our Pricing</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/blog-1">
-                                        <a>Latest News</a>
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-3 col-md-6">
-                        <div className="single-footer-widget">
-                            <h3>Support</h3>
-                            <ul className="list">
-                                <li>
-                                    <Link href="/faq">
-                                        <a>FAQ</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/privacy-policy">
-                                        <a>Privacy Policy</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/term-condition">
-                                        <a>Terms & Condition</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/team">
-                                        <a>Team</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/contact">
-                                        <a>Contact Us</a>
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-3 col-md-6">
-                        <div className="single-footer-widget">
-                            <h3>Address</h3>
-
-                            <ul className="footer-contact-info">
-                                <li>
-                                    <Icon.MapPin />
-                                    27 Division St, New York, <br /> NY 10002, USA
-                                </li>
-                                <li>
-                                    <Icon.Mail />
-                                    Email: <a href="mailto:startp@gmail.com">startp@gmail.com</a>
-                                </li>
-                                <li>
-                                    <Icon.PhoneCall />
-                                    Phone: <a href="tel:321984754">+ (321) 984 754</a>
-                                </li>
-                            </ul>
-                            <ul className="social-links">
-                                <li>
-                                    <Link href="#">
-                                        <a className="facebook" target="_blank"><Icon.Facebook /></a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="#">
-                                        <a className="instagram" target="_blank"><Icon.Instagram /></a>
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-12 col-md-12">
-                        <div className="copyright-area">
-                            <p>Copyright &copy; {currentYear} StartP. All rights reserved by EnvyTheme</p>
-                        </div>
-                    </div>
-                </div>
+  return (
+    <footer className="footer-area bg-f7fafd pb-80">
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-3 col-md-6">
+            <div className="single-footer-widget">
+              <div className="logo">
+                <Link href="/">
+                  <a>
+                    <img src="../../images/coffee-logo.png" alt="logo" />
+                  </a>
+                </Link>
+              </div>
+              <p>
+                Friends Coffee sẽ là nơi mọi người xích lại gần nhau, đề cao giá
+                trị kết nối con người và sẻ chia thân tình bên những tách cà
+                phê, ly trà đượm hương, truyền cảm hứng về lối sống hiện đại.
+              </p>
             </div>
+          </div>
 
-            {/* <img src="/images/map.png" className="map" alt="map" /> */}
-        </footer>
-    )
+          <div className="col-lg-3 col-md-6">
+            <div className="single-footer-widget pl-5">
+              <h3>Giới thiệu</h3>
+              <ul className="list">
+                <li>
+                  <Link href="/coming-soon">
+                    <a>Về chúng tôi</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/menu">
+                    <a>Sản phẩm</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/coming-soon">
+                    <a>Chuyện bên lề</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/coming-soon">
+                    <a>Tuyển dụng</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/coming-soon">
+                    <a>Khuyến mãi</a>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
 
-}
+          <div className="col-lg-3 col-md-6">
+            <div className="single-footer-widget">
+              <h3>Hỗ trợ</h3>
+              <ul className="list">
+                <li>
+                  <Link href="/coming-soon">
+                    <a>Góp ý</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/coming-soon">
+                    <a>Chính sách</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/coming-soon">
+                    <a>Liên hệ</a>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
 
-export default Footer; 
+          <div className="col-lg-3 col-md-6">
+            <div className="single-footer-widget">
+              <h3>Địa chỉ</h3>
+
+              <ul className="footer-contact-info">
+                <li>
+                  <Icon.MapPin />
+                  Tầng 3-4 Hub Building 195/10E Điện Biên Phủ, P.15, Q.Bình
+                  Thạnh, TP.Hồ Chí Minh
+                </li>
+                <li>
+                  <Icon.Mail />
+                  Email: <a href="mailto:startp@gmail.com">startp@gmail.com</a>
+                </li>
+                <li>
+                  <Icon.PhoneCall />
+                  Điện thoại: <a href="tel:321984754">+ (321) 984 754</a>
+                </li>
+              </ul>
+              <ul className="social-links">
+                <li>
+                  <Link href="#">
+                    <a className="facebook" target="_blank">
+                      <Icon.Facebook />
+                    </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#">
+                    <a className="instagram" target="_blank">
+                      <Icon.Instagram />
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <img src="/images/map.png" className="map" alt="map" /> */}
+    </footer>
+  );
+};
+
+export default Footer;
