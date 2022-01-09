@@ -1,88 +1,37 @@
 import React from "react";
-import Link from "next/link";
 import PageBanner from "../components/Layout/PageBanner";
 import Header from "../components/Layout/Header";
+import { useToasts } from "react-toast-notifications";
+import { useSelector, useDispatch } from "react-redux";
 import Footer from "../components/Layout/Footer";
-import axios from "axios"
 import ProductCard from "../components/Shop/ProductCard";
 import Filter from "../components/Shop/Filter"
 
 const Menu = () => {
+  const dispatch = useDispatch();
+  const { addToast } = useToasts();
 
-  //   React.useEffect(() => {
-  //     let elementId = document.getElementById('category')
-  //     document.addEventListener('scroll', () => {
-  //         if (window.scrollY < 500) {
-  //             elementId.classList.remove('is-bottom')
-  //             elementId.classList.add('is-stop')
-  //         } else {
-  //             elementId.classList.remove('is-stop')
-  //             elementId.classList.add('is-bottom')
-  //         }
-  //     })
-  //     window.scrollTo(0, 0)
-  // })
-
+  const filterProduct = (param) => {
+    console.log("run run run")
+    console.log(param)
+    dispatch({
+      type: "FILTER_PRODUCT",
+      param: param
+    })
+    addToast("Filter Product Successfully", { appearance: "success" });
+  }
   return (
     <>
       <Header />
       <PageBanner pageTitle="Menu" />
       <div className="container">
-        {/* <div className="row"> */}
-        {/* <div className="col-lg-2 pt-80">
-            <div id="category">
-              <ul className="category-list">
-                <li>
-                  <Link href="#" activeClassName="active">
-                    <a className="">Tất cả</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" activeClassName="active">
-                    <a className="">Cà phê</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" activeClassName="active">
-                    <a className="">Trà</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" activeClassName="active">
-                    <a className="">Tất cả</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" activeClassName="active">
-                    <a className="">Món khác</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" activeClassName="active">
-                    <a className="">Bánh</a>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div> */}
-        {/* <div className="col-lg-10 menu-products"> */}
-        <Filter />
+        <Filter filterProduct={filterProduct} />
         <ProductCard />
-        {/* </div> */}
-        {/* </div> */}
       </div>
 
       <Footer />
     </>
   );
 };
-
-// Menu.getInitialProps = async ctx => {
-//   const url = 'http://localhost:3000/api/product'
-//   const req = await axios.get(url)
-//   return {
-//     productsData: req.data
-//   }
-// }
 
 export default Menu;

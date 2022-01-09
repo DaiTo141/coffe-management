@@ -1,3 +1,4 @@
+import { INTERNALS } from "next/dist/server/web/spec-extension/request";
 import { useMemo } from "react";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -9,14 +10,15 @@ const initialState = {
   products: [],
   cart: [],
   total: 0,
+  allProducts: []
 };
 
-console.log("in", initialState);
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_PRODUCT_DATA":
       state.products = action.products
+      state.allProducts = state.products
       console.log(state)
       return {
         ...state
@@ -77,7 +79,6 @@ const reducer = (state = initialState, action) => {
     case "ADD_QUANTITY_WITH_NUMBER":
       console.log(state)
       let addedItemD = state.products.find((item) => item.id == +action.id);
-      console.log(`addItemD`, state.products)
       //check if the action id exists in the addedItems
       let existed_itemd = state.cart.find((item) => +action.id == item.id);
       if (existed_itemd) {
@@ -111,7 +112,21 @@ const reducer = (state = initialState, action) => {
         cart: new_items,
         total: newTotalRemove,
       };
-
+    case "FILTER_PRODUCT":
+      state.products = state.allProducts
+      console.log(action)
+      let filter = action.param
+      if (filter == "All") return { ...state }
+      else if (filter == "Tea") {
+        console.log("run run")
+        state.products = state.products.filter(item => item.id_cat == 6)
+      }
+      else if (filter == "Coffee") {
+        state.products = state.products.filter(item => item.id_cat == 5)
+      }
+      return {
+        ...state
+      }
     case "RESET":
       return {
         ...state,
