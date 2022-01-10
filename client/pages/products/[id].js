@@ -2,13 +2,14 @@ import React from "react";
 import PageBanner from "../../components/Layout/PageBanner";
 import Header from "../../components/Layout/Header";
 import Footer from "../../components/Layout/Footer";
+import Link from "next/link";
 import ProductSlider from "../../components/Shop/ProductSlider";
 import ProductsDetailsTabs from "../../components/Shop/ProductsDetailsTabs";
 import * as Icon from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { ToastConsumer, useToasts } from "react-toast-notifications";
-import axios from 'axios'
+import axios from "axios";
 
 const ProductDetails = ({ productsData }) => {
   const { addToast } = useToasts();
@@ -16,10 +17,8 @@ const ProductDetails = ({ productsData }) => {
   const router = useRouter();
   const productId = router.query.id;
   const product = useSelector((state) => {
-    return state.products.find((item) => item.id == productId)
-  }
-
-  );
+    return state.products.find((item) => item.id == productId);
+  });
   const [qty, setQty] = React.useState(1);
 
   const increment = () => {
@@ -36,8 +35,12 @@ const ProductDetails = ({ productsData }) => {
       id: productId,
       qty: qty,
     });
-    addToast("Chọn món thành công", { appearance: "success"});
+    addToast("Chọn món thành công", { appearance: "success" });
   };
+
+  const backToHome = () => {
+    router.push("/menu")
+  }
 
   return (
     <>
@@ -49,10 +52,7 @@ const ProductDetails = ({ productsData }) => {
           <div className="row align-items-center">
             <div className="col-lg-5">
               {/* <ProductSlider images={product && product.images} /> */}
-              <img
-                src={product && product.thumbnail}
-                alt="tea"
-              ></img>
+              <img src={product && product.thumbnail} alt="tea"></img>
             </div>
 
             <div className="col-lg-7">
@@ -107,6 +107,9 @@ const ProductDetails = ({ productsData }) => {
                   </div>
                   <button type="submit" onClick={addToCart}>
                     Thêm vào giỏ
+                  </button>
+                  <button type="button" onClick={backToHome} className="continue-shopping">
+                    Tiếp tục mua
                   </button>
                 </form>
 
