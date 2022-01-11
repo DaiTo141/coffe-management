@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var dotenv = require('dotenv');
+var moment = require('moment')
 var jwt = require('jsonwebtoken');
 const db = require('../../connection');
 var data = require("../../product.json")
@@ -46,5 +47,73 @@ router.get('/product', async (req, res) => {
   const product = await db.query(`select * from Product`);
   return res.send(product.recordsets[0]);
 });
+router.get('/thong-tin-kho-hang', async (req, res) => {
+  const product = await db.query(`select * from Customer`);
+  return res.send(product.recordsets[0]);
+});
+router.post('/customer', async (req, res) => {
+  let idCustomer
+  let data = req.body.customer
+  let cartData = req.body.cart
+  let totalPrice = 0
+  cartData.forEach((item) => {
+    totalPrice += item.price * item.quantity
+  })
+  let date = new Date()
+  date = moment().format("YYYY-MM-DD HH:mm:ss")
+  console.log(`date`, date)
+  // console.log(`totalPrice`, totalPrice)
+
+  // console.log(cartData)
+
+  const sqlInsertCustomer = `
+  INSERT INTO quan_ly_cafe.dbo.Customer
+  (fullname, address, email, phone_number)
+  VALUES(N'${data.name}', N'${data.street}', N'${data.email}', N'${data.phone}');
+  `
+  const sqlCheckCustomer = `
+  SELECT * FROM Customer
+  WHERE email = '${data.email}'
+  `
+
+  let customerData = await db.query(sqlCheckCustomer)
+  if (customerData.rowsAffected[0] > 0) {
+    idCustomer = customerData.recordset[0].id
+    console.log("id", idCustomer)
+  } else {
+    await db.query(sqlInsertCustomer);
+    customerData = await db.query(sqlCheckCustomer)
+    idCustomer = customerData.recordset[0].id
+    console.log("id", idCustomer)
+  }
+  const sqlInsertOrders = `
+  INSERT INTO quan_ly_cafe.dbo.Orders
+  (staff_id, customer_id, total_price, order_date, note)
+  VALUES(3, ${idCustomer}, ${totalPrice}, '${date}', N'${data.notes}');
+  `
+  await db.query(sqlInsertOrders)
+  let newOrder = await db.query(`select Max(id) from Orders`)
+  let idOrder = newOrder.recordset[0]['']
+  console.log(`idOrder`, idOrder)
+
+  // INSERT INTO quan_ly_cafe.dbo.OrderDetail
+  // (product_id, [number], price, total_price, order_id)
+  // VALUES(0, 0, 0, 0, 0);
+  cartData.forEach(async (item) => {
+    console.log("run for each")
+    let sqlInsertOrderDetail =
+      `
+    INSERT INTO quan_ly_cafe.dbo.OrderDetail
+    (product_id, [number], price, total_price, order_id)
+    VALUES(${item.id}, ${item.quantity}, ${item.price}, ${item.price * item.quantity}, ${idOrder});
+    `
+    await db.query(sqlInsertOrderDetail)
+  })
+
+
+
+  // console.log(customerData)
+  return res.send("hello")
+})
 
 module.exports = router;

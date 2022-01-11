@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+var cors = require('cors')
 
 dotenv.config({ path: './.env' });
 
@@ -13,6 +14,7 @@ var loginRouter = require('./src/routes/login')
 const privatePaths = ['authorization']
 
 var app = express();
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -42,11 +42,23 @@ const Checkout = () => {
   };
 
   const onSubmit = (e) => {
-    console.log(e);
+    console.log(cart)
+    console.log({
+      cart: cart,
+      customer: e
+    });
+    createCustomer({
+      cart: cart,
+      customer: e
+    })
     alertContent();
     reset();
   };
-
+  const createCustomer = async (info) => {
+    const url = 'http://localhost:3000/api/customer'
+    let response = await axios.post(url, info)
+    console.log(response)
+  }
   let totalmoney = 20000;
 
   const countTotal = () => {
@@ -69,7 +81,6 @@ const Checkout = () => {
               <div className="col-lg-6 col-md-12">
                 <div className="billing-details">
                   <h3 className="title">Thông tin khách hàng</h3>
-
                   <div className="row">
                     <div className="col-lg-12 col-md-12">
                       <div className="form-group">
@@ -94,19 +105,19 @@ const Checkout = () => {
                     <div className="col-lg-6 col-md-6">
                       <div className="form-group">
                         <label>
-                          Quận <span className="required">*</span>
+                          Số điện thoại <span className="required">*</span>
                         </label>
                         <input
                           type="text"
-                          name="district"
+                          name="phone"
                           className="form-control"
-                          {...register("district", { required: true })}
+                          {...register("phone", { required: true })}
                         />
                         <div
                           className="invalid-feedback"
                           style={{ display: "block" }}
                         >
-                          {errors.district && "Bạn chưa điền quận."}
+                          {errors.phone && "Bạn chưa điền số điện thoại."}
                         </div>
                       </div>
                     </div>
@@ -114,19 +125,19 @@ const Checkout = () => {
                     <div className="col-lg-6 col-md-6">
                       <div className="form-group">
                         <label>
-                          Phường<span className="required">*</span>
+                          Email<span className="required">*</span>
                         </label>
                         <input
                           type="text"
-                          name="ward"
+                          name="email"
                           className="form-control"
-                          {...register("ward", { required: true })}
+                          {...register("email", { required: true })}
                         />
                         <div
                           className="invalid-feedback"
                           style={{ display: "block" }}
                         >
-                          {errors.ward && "Bạn chưa điền phường."}
+                          {errors.email && "Bạn chưa điền email."}
                         </div>
                       </div>
                     </div>
@@ -151,32 +162,6 @@ const Checkout = () => {
                         </div>
                       </div>
                     </div>
-
-                    <div className="col-lg-12 col-md-12">
-                      <div className="form-group">
-                        <label>
-                          Số điện thoại <span className="required">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="phone"
-                          id="number"
-                          className="form-control"
-                          {...register("phone", {
-                            required: true,
-                            pattern: /^[0-9]+$/i,
-                          })}
-                        />
-                        <div
-                          className="invalid-feedback"
-                          style={{ display: "block" }}
-                        >
-                          {errors.phone &&
-                            "Bạn chưa điền số điện thoại hoặc số điện thoại không hợp lệ."}
-                        </div>
-                      </div>
-                    </div>
-
                     <div className="col-lg-12 col-md-12">
                       <div className="form-group">
                         <textarea
@@ -186,6 +171,7 @@ const Checkout = () => {
                           rows="4"
                           placeholder="Ghi chú"
                           className="form-control"
+                          {...register("notes")}
                         ></textarea>
                       </div>
                     </div>
@@ -262,6 +248,7 @@ const Checkout = () => {
                     <button
                       type="submit"
                       className="btn btn-primary"
+                    // onClick={() => handleClickCheckout()}
                     >
                       Đặt hàng
                     </button>
