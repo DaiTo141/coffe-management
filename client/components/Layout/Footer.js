@@ -94,11 +94,11 @@ const Footer = () => {
                 </li>
                 <li>
                   <Icon.Mail />
-                  Email: <a href="mailto:startp@gmail.com">startp@gmail.com</a>
+                  Email: <a href="#">friend@gmail.com</a>
                 </li>
                 <li>
                   <Icon.PhoneCall />
-                  Điện thoại: <a href="tel:321984754">+ (321) 984 754</a>
+                  Điện thoại: <a href="#">+8488888888</a>
                 </li>
               </ul>
               <ul className="social-links">

@@ -187,6 +187,15 @@ textarea.form-control {
 }
 
 /* btn btn-primary */
+.continue-shopping {
+  margin: 0 20px !important;
+  background-color: #c679e3 !important;
+}
+
+.continue-shopping:hover {
+  background-color: #44ce6f !important;
+}
+
 .btn-primary {
   color: #ffffff !important;
   background-color: #44ce6f !important;
