@@ -3,6 +3,7 @@ import Link from "next/link";
 import * as Icon from "react-feather";
 import { BillData, ProductData } from "./BillData";
 import Modal from "react-modal";
+import axios from "axios";
 
 const customStyles = {
   content: {
@@ -18,27 +19,37 @@ let billDetail = BillData[0];
 let productsDetail = ProductData[0];
 
 const OrderList = ({ ordersData }) => {
-  console.log(ordersData)
+  console.log("ordersData", ordersData)
+
   const [modal, setModal] = useState(false);
 
-  const openModal = (id) => {
-    billDetail = getBillDetail(id);
-    productsDetail = getProducts(id);
+  const formatTime = (time) => {
+    let z = time.split("T")[0]
+    let t = time.split("T")[1].split(".")[0]
+    return t + " " + z
+  }
+  const openModal = async (bill) => {
+    let orderId = bill.id[0];
+
+    console.log(`orderId`, orderId)
+    let url = `http://localhost:3000/api/order-detail`
+    let orderDetail = await axios.get(url, {
+      params: {
+        orderId: orderId
+      }
+    })
+    billDetail = {
+      id: bill.id[0],
+      name: bill.name
+    }
+    console.log(`orderDetail`, orderDetail)
+    productsDetail = orderDetail.data.response;
+    console.log(`productsDetail`, productsDetail)
     setModal(true);
   };
 
   const closeModal = () => {
     setModal(false);
-  };
-
-  const getProducts = (id) => {
-    let products = ProductData.find((bill) => bill.id == id);
-    return products;
-  };
-
-  const getBillDetail = (id) => {
-    let billDetail = BillData.find((bill) => bill.id == id);
-    return billDetail;
   };
   return (
     <>
@@ -58,14 +69,14 @@ const OrderList = ({ ordersData }) => {
           <tbody style={{
             "cursor": "pointer"
           }}>
-            {BillData.map((bill) => (
-              <>
-                <tr key={bill.id} onClick={() => openModal(bill.id)}>
+            {ordersData.map((bill) => {
+              return (
+                <tr key={bill.id} onClick={() => openModal(bill)}>
                   <td className="product-name">
-                    <p>{bill.name}</p>
+                    <p>{bill.fullname}</p>
                   </td>
                   <td className="product-name">
-                    <p>{bill.phone}</p>
+                    <p>{bill.phone_number}</p>
                   </td>
                   <td className="product-name">
                     <p>{bill.address}</p>
@@ -74,17 +85,18 @@ const OrderList = ({ ordersData }) => {
                     <p>{bill.email}</p>
                   </td>
                   <td className="product-name">
-                    <p>{bill.total}</p>
+                    <p>{bill.total_price}</p>
                   </td>
                   <td className="product-name">
-                    <p>{bill.time}</p>
+                    <p>{formatTime(bill.order_date)}</p>
                   </td>
                   <td className="product-name">
                     <p>{bill.note}</p>
                   </td>
                 </tr>
-              </>
-            ))}
+              )
+            }
+            )}
           </tbody>
         </table>
 
@@ -104,6 +116,7 @@ const OrderList = ({ ordersData }) => {
                     <th scope="col">Tên</th>
                     <th scope="col">Giá tiền</th>
                     <th scope="col">Số lượng</th>
+                    <th scope="col">Tổng tiền</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -113,12 +126,17 @@ const OrderList = ({ ordersData }) => {
                         <span className="subtotal-amount">{prt.name}</span>
                       </td>
 
+
                       <td className="product-total">
                         <span className="subtotal-amount">{prt.price}</span>
                       </td>
 
+
                       <td className="product-subtotal">
                         <span className="subtotal-amount">{prt.quantity}</span>
+                      </td>
+                      <td className="product-total">
+                        <span className="subtotal-amount">{prt.price * prt.quantity}</span>
                       </td>
                     </tr>
                   ))}
@@ -132,13 +150,4 @@ const OrderList = ({ ordersData }) => {
   );
 };
 
-OrderList.getServerSideProps = async ctx => {
-  console.log("run runr un")
-  const url = 'http://localhost:3000/api/orders'
-  const req = await axios.get(url)
-  console.log(`req`, req)
-  return {
-    ordersData: req.data
-  }
-}
 export default OrderList;

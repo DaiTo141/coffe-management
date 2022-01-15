@@ -42,11 +42,6 @@ const Checkout = () => {
   };
 
   const onSubmit = (e) => {
-    console.log(cart)
-    console.log({
-      cart: cart,
-      customer: e
-    });
     createCustomer({
       cart: cart,
       customer: e
@@ -57,7 +52,6 @@ const Checkout = () => {
   const createCustomer = async (info) => {
     const url = 'http://localhost:3000/api/customer'
     let response = await axios.post(url, info)
-    console.log(response)
   }
   let totalmoney = 20000;
 

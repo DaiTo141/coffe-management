@@ -37,6 +37,7 @@ export default Home;
 
 Home.getInitialProps = async ctx => {
   const url = 'http://localhost:3000/api/product'
+  console.log(`url`, url)
   const req = await axios.get(url)
   return {
     productsData: req.data
