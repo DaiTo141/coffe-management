@@ -17,10 +17,9 @@ const customStyles = {
 let billDetail = BillData[0];
 let productsDetail = ProductData[0];
 
-const OrderList = () => {
+const OrderList = ({ ordersData }) => {
+  console.log(ordersData)
   const [modal, setModal] = useState(false);
-
-  console.log("product ", productsDetail.products[0]);
 
   const openModal = (id) => {
     billDetail = getBillDetail(id);
@@ -56,7 +55,9 @@ const OrderList = () => {
               <th scope="col">Ghi chú</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody style={{
+            "cursor": "pointer"
+          }}>
             {BillData.map((bill) => (
               <>
                 <tr key={bill.id} onClick={() => openModal(bill.id)}>
@@ -131,4 +132,13 @@ const OrderList = () => {
   );
 };
 
+OrderList.getServerSideProps = async ctx => {
+  console.log("run runr un")
+  const url = 'http://localhost:3000/api/orders'
+  const req = await axios.get(url)
+  console.log(`req`, req)
+  return {
+    ordersData: req.data
+  }
+}
 export default OrderList;
