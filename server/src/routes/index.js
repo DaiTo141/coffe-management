@@ -47,10 +47,35 @@ router.get('/product', async (req, res) => {
   const product = await db.query(`select * from Product`);
   return res.send(product.recordsets[0]);
 });
-router.get('/thong-tin-kho-hang', async (req, res) => {
-  const product = await db.query(`select * from Customer`);
-  return res.send(product.recordsets[0]);
-});
+router.get("/orders", async (req, res) => {
+  const orders = await db.query(`select * from Orders o, Customer c WHERE o.customer_id  = c.id `);
+  console.log(orders.recordsets[0])
+  return res.send(orders.recordsets[0])
+})
+router.get("/order-detail", async (req, res) => {
+  console.log("req", req.query.orderId)
+  let orderId = req.query.orderId
+  let order_detail = await db.query(`select * from OrderDetail od WHERE od.order_id = ${orderId}`)
+  // console.log(order_detail)
+  let response = {
+    products: []
+  }
+  order_detail = order_detail.recordsets[0]
+  for (let j = 0; j < order_detail.length; j++) {
+    let productDetail = await db.query(`select * from Product p WHERE p.id = ${order_detail[j].product_id}`)
+    productDetail = productDetail.recordsets[0]
+    response.products.push({
+      id: order_detail[j].id,
+      quantity: order_detail[j].number,
+      name: productDetail[0].title,
+      price: productDetail[0].price
+    })
+  }
+  console.log(`response`, response)
+  return res.send({
+    response: response
+  })
+})
 router.post('/customer', async (req, res) => {
   let idCustomer
   let data = req.body.customer
@@ -94,13 +119,10 @@ router.post('/customer', async (req, res) => {
   await db.query(sqlInsertOrders)
   let newOrder = await db.query(`select Max(id) from Orders`)
   let idOrder = newOrder.recordset[0]['']
-  console.log(`idOrder`, idOrder)
-
   // INSERT INTO quan_ly_cafe.dbo.OrderDetail
   // (product_id, [number], price, total_price, order_id)
   // VALUES(0, 0, 0, 0, 0);
   cartData.forEach(async (item) => {
-    console.log("run for each")
     let sqlInsertOrderDetail =
       `
     INSERT INTO quan_ly_cafe.dbo.OrderDetail
@@ -109,9 +131,6 @@ router.post('/customer', async (req, res) => {
     `
     await db.query(sqlInsertOrderDetail)
   })
-
-
-
   // console.log(customerData)
   return res.send("hello")
 })
