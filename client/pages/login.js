@@ -16,8 +16,8 @@ const Login = () => {
   const alertContent = () => {
     if (isLogin) {
       MySwal.fire({
-        title: "Thank you!",
-        text: "You are login",
+        title: "Thành công",
+        text: "Bạn đã đăng nhập với username là:      password là:   ",
         icon: "success",
         // timer: 5000,
         timerProgressBar: true,
@@ -55,9 +55,10 @@ const Login = () => {
 
             <form>
               <div className="mb-3">
-                <label className="form-label">Email</label>
+                <label className="form-label">User Name</label>
                 <input
-                  type="email"
+                  name="username"
+                  type="text"
                   className="form-control"
                   id="exampleInputEmail1"
                   onChange={userType}
@@ -67,6 +68,7 @@ const Login = () => {
               <div className="mb-3">
                 <label className="form-label">Password</label>
                 <input
+                  name="password"
                   type="password"
                   className="form-control"
                   id="exampleInputPassword1"
