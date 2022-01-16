@@ -48,19 +48,43 @@ router.get('/product', async (req, res) => {
   return res.send(product.recordsets[0]);
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const username = req.body.username;
-
-  console.log("username", username)
+  const password = req.body.password;
+  const responseUser = await db.query(`select * from users u where u.username = '${username}'`)
+  if (responseUser.rowsAffected[0] == 0) {
+    return res.json({
+      errorMessage: "Không tồn tại user trong hệ thống"
+    })
+  }
+  const idUser = responseUser.recordsets[0][0].id
+  const responsePassword = await db.query(`select * from users u where u.id = '${idUser}'`)
+  if (responsePassword.recordsets[0][0].password != password) {
+    return res.json({
+      errorMessage: "Mật khẩu sai, vui lòng nhập lại"
+    })
+  }
   const user = { name: username }
   const accessToken = generateAccessToken(user)
   return res.json({ accessToken: accessToken })
 })
 
 function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1500s' })
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {})
 }
-
+router.get("/verifyToken", async (req, res) => {
+  const token = req.body.token
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err) => {
+    console.log(err)
+    if (err) {
+      return res.json(err)
+    }
+  })
+  return res.json({
+    status: true,
+    message: "valid token"
+  })
+})
 router.post('/customer', async (req, res) => {
   let idCustomer
   let data = req.body.customer
