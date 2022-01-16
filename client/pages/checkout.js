@@ -51,7 +51,7 @@ const Checkout = () => {
   };
   const createCustomer = async (info) => {
     const url = 'http://localhost:3000/api/customer'
-    let response = await axios.post(url, info)
+    await axios.post(url, info)
   }
   let totalmoney = 20000;
 

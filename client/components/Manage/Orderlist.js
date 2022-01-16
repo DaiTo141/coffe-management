@@ -40,9 +40,9 @@ const OrderList = ({ ordersData }) => {
     })
     billDetail = {
       id: bill.id[0],
-      name: bill.name
+      name: bill.fullname
     }
-    console.log(`orderDetail`, orderDetail)
+    console.log(`orderDetail`, billDetail)
     productsDetail = orderDetail.data.response;
     console.log(`productsDetail`, productsDetail)
     setModal(true);
@@ -108,12 +108,12 @@ const OrderList = ({ ordersData }) => {
         >
           <div className="order-details">
             <h3 className="title">Đơn hàng số: {billDetail.id}</h3>
-            <h4>Tên: {billDetail.name}</h4>
+            <h4>Tên khách hàng: {billDetail.name}</h4>
             <div className="order-table table-responsive">
               <table className="table table-bordered">
                 <thead>
                   <tr>
-                    <th scope="col">Tên</th>
+                    <th scope="col">Tên sản phẩm</th>
                     <th scope="col">Giá tiền</th>
                     <th scope="col">Số lượng</th>
                     <th scope="col">Tổng tiền</th>
