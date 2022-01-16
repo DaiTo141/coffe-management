@@ -5,6 +5,7 @@ import PageBanner from "../components/Layout/PageBanner";
 import Link from "next/link";
 import * as Icon from "react-feather";
 import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
 import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 const MySwal = withReactContent(Swal);
@@ -13,17 +14,25 @@ const Login = () => {
   const router = useRouter();
   const [isLogin, setLogin] = useState(false);
 
-  const alertContent = () => {
+  const { handleSubmit, register } = useForm();
+
+  const alertContent = (e) => {
     if (isLogin) {
       MySwal.fire({
         title: "Thành công",
-        text: "Bạn đã đăng nhập với username là:      password là:   ",
+        text: `Bạn đã đăng nhập với USERNAME là: ${e.username} PASSWORD là: ${e.password}`,
         icon: "success",
         // timer: 5000,
         timerProgressBar: true,
         showConfirmButton: true,
       });
     } else console.log("hello");
+  };
+
+  const onSubmit = (e) => {
+    // e.preventDefault();
+    alertContent(e)
+    console.log("data", e.username);
   };
 
   const userType = () => {
@@ -53,7 +62,7 @@ const Login = () => {
               </p>
             </div>
 
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-3">
                 <label className="form-label">User Name</label>
                 <input
@@ -61,6 +70,7 @@ const Login = () => {
                   type="text"
                   className="form-control"
                   id="exampleInputEmail1"
+                  {...register("username")}
                   onChange={userType}
                 />
               </div>
@@ -72,6 +82,7 @@ const Login = () => {
                   type="password"
                   className="form-control"
                   id="exampleInputPassword1"
+                  {...register("password")}
                   onChange={userType}
                 />
               </div>
@@ -84,11 +95,7 @@ const Login = () => {
                 </p>
               </div>
 
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onClick={alertContent}
-              >
+              <button type="submit" className="btn btn-primary">
                 Login
               </button>
             </form>
