@@ -27,7 +27,7 @@ const Manage = ({ ordersData }) => {
 
 export default Manage;
 Manage.getInitialProps = async ctx => {
-  const url = 'http://localhost:3000/api/orders'
+  const url = 'http://localhost:3000/authorization/orders'
   const req = await axios.get(url)
   return {
     ordersData: req.data

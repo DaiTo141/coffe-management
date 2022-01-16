@@ -19,7 +19,6 @@ let billDetail = BillData[0];
 let productsDetail = ProductData[0];
 
 const OrderList = ({ ordersData }) => {
-  console.log("ordersData", ordersData)
 
   const [modal, setModal] = useState(false);
 
@@ -31,8 +30,7 @@ const OrderList = ({ ordersData }) => {
   const openModal = async (bill) => {
     let orderId = bill.id[0];
 
-    console.log(`orderId`, orderId)
-    let url = `http://localhost:3000/api/order-detail`
+    let url = `http://localhost:3000/authorization/order-detail`
     let orderDetail = await axios.get(url, {
       params: {
         orderId: orderId
@@ -42,9 +40,7 @@ const OrderList = ({ ordersData }) => {
       id: bill.id[0],
       name: bill.fullname
     }
-    console.log(`orderDetail`, billDetail)
     productsDetail = orderDetail.data.response;
-    console.log(`productsDetail`, productsDetail)
     setModal(true);
   };
 
