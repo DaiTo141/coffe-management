@@ -11,7 +11,7 @@ dotenv.config({ path: './.env' });
 
 var indexRouter = require('./src/routes/index');
 var loginRouter = require('./src/routes/login')
-const privatePaths = ['authorization']
+const privatePaths = ['api']
 
 var app = express();
 app.use(cors())
@@ -23,6 +23,8 @@ app.use(cookieParser());
 
 function authenticateToken(req, res, next) {
   if (privatePaths.filter(p => {
+    console.log("p", p)
+    console.log("path", req.path.indexOf(p))
     return req.path.indexOf(p) >= 0
   }).length != 0) return next();
   const authHeader = req.headers['authorization']
@@ -37,7 +39,7 @@ function authenticateToken(req, res, next) {
 }
 
 // catch 404 and forward to error handler
-// app.all('*', authenticateToken)
+app.all('*', authenticateToken)
 app.use('/api', indexRouter);
 app.use('/authorization', loginRouter)
 app.use(function (req, res, next) {

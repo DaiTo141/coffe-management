@@ -48,9 +48,9 @@ const Login = () => {
                   <img src="../images/coffee-logo.png" />
                 </a>
               </Link>
-              <p>
+              {/* <p>
                 Don't have an account yet? <Link href="/sign-up">Sign Up</Link>
-              </p>
+              </p> */}
             </div>
 
             <form>
@@ -74,13 +74,13 @@ const Login = () => {
                 />
               </div>
 
-              <div className="mb-3">
+              {/* <div className="mb-3">
                 <p>
                   <Link href="/forgot-password">
                     <a>Forgot Password</a>
                   </Link>
                 </p>
-              </div>
+              </div> */}
 
               <button
                 type="submit"
@@ -90,7 +90,7 @@ const Login = () => {
                 Login
               </button>
             </form>
-
+            {/* 
             <div className="foot">
               <p>or connect with</p>
               <ul>
@@ -110,7 +110,7 @@ const Login = () => {
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
