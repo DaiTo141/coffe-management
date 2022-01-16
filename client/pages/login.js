@@ -1,11 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
 import PageBanner from "../components/Layout/PageBanner";
 import Link from "next/link";
 import * as Icon from "react-feather";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { useRouter } from "next/router";
+const MySwal = withReactContent(Swal);
 
 const Login = () => {
+  const router = useRouter();
+  const [isLogin, setLogin] = useState(false);
+
+  const alertContent = () => {
+    if (isLogin) {
+      MySwal.fire({
+        title: "Thank you!",
+        text: "You are login",
+        icon: "success",
+        // timer: 5000,
+        timerProgressBar: true,
+        showConfirmButton: true,
+      });
+    } else console.log("hello");
+  };
+
+  const userType = () => {
+    setLogin(true);
+    //Cho nay set bi cham 1 nhip
+    setTimeout(() => {
+      console.log("this is the third message", isLogin);
+    }, 1000);
+  };
   return (
     <>
       <Header />
@@ -33,6 +60,7 @@ const Login = () => {
                   type="email"
                   className="form-control"
                   id="exampleInputEmail1"
+                  onChange={userType}
                 />
               </div>
 
@@ -42,6 +70,7 @@ const Login = () => {
                   type="password"
                   className="form-control"
                   id="exampleInputPassword1"
+                  onChange={userType}
                 />
               </div>
 
@@ -53,7 +82,11 @@ const Login = () => {
                 </p>
               </div>
 
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={alertContent}
+              >
                 Login
               </button>
             </form>
