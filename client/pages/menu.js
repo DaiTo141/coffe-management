@@ -12,8 +12,6 @@ const Menu = () => {
   const { addToast } = useToasts();
 
   const filterProduct = (param) => {
-    console.log("run run run")
-    console.log(param)
     dispatch({
       type: "FILTER_PRODUCT",
       param: param

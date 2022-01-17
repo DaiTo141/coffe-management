@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import * as Icon from "react-feather";
 import { BillData, ProductData } from "./BillData";
 import Modal from "react-modal";
+import ReactPaginate from "react-paginate";
 
 const customStyles = {
   content: {
@@ -18,9 +19,35 @@ let billDetail = BillData[0];
 let productsDetail = ProductData[0];
 
 const OrderList = () => {
-  const [modal, setModal] = useState(false);
+  //For paginate
+  const itemsPerPage = 1;
+  // We start with an empty list of items.
+  const items = BillData;
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  // Here we use item offsets; we could also use page offsets
+  // following the API or data you're working with.
+  const [itemOffset, setItemOffset] = useState(0);
 
-  console.log("product ", productsDetail.products[0]);
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % items.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
+  useEffect(() => {
+    // Fetch items from another resources.
+    const endOffset = itemOffset + itemsPerPage;
+    console.log("end oof ", endOffset);
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(items.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(items.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage]);
+
+  //For modal
+  const [modal, setModal] = useState(false);
 
   const openModal = (id) => {
     billDetail = getBillDetail(id);
@@ -57,7 +84,7 @@ const OrderList = () => {
             </tr>
           </thead>
           <tbody>
-            {BillData.map((bill) => (
+            {currentItems.map((bill) => (
               <>
                 <tr key={bill.id} onClick={() => openModal(bill.id)}>
                   <td className="product-name">
@@ -86,6 +113,28 @@ const OrderList = () => {
             ))}
           </tbody>
         </table>
+        <div className="pagination-area">
+          <ReactPaginate
+            nextLabel="Next"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={pageCount}
+            previousLabel="Prev"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={null}
+          />
+        </div>
 
         <Modal
           isOpen={modal}
