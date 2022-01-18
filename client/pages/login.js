@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
+import axios from "axios";
 const MySwal = withReactContent(Swal);
 
 const Login = () => {
@@ -15,7 +16,6 @@ const Login = () => {
   const [isLogin, setLogin] = useState(false);
 
   const { handleSubmit, register } = useForm();
-
   const alertContent = (e) => {
     if (isLogin) {
       MySwal.fire({
@@ -29,18 +29,33 @@ const Login = () => {
     } else console.log("hello");
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     // e.preventDefault();
-    alertContent(e)
-    console.log("data", e.username);
+    // console.log(`e`, e)
+    let response = await axios.post("http://localhost:3000/api/login", {
+      username: e.username,
+      password: e.password
+    })
+    let data = response.data
+    if (data.errorMessage) {
+      MySwal.fire({
+        title: "Thất bại",
+        text: `${data.errorMessage}`,
+        icon: "error",
+        // timer: 5000,
+        timerProgressBar: true,
+        showConfirmButton: true,
+      });
+    }
+    else {
+      localStorage.setItem("token", data.accessToken)
+      router.push('/manage')
+    }
   };
 
   const userType = () => {
     setLogin(true);
     //Cho nay set bi cham 1 nhip
-    setTimeout(() => {
-      console.log("this is the third message", isLogin);
-    }, 1000);
   };
   return (
     <>

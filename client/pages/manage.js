@@ -28,7 +28,9 @@ const Manage = ({ ordersData }) => {
 export default Manage;
 Manage.getInitialProps = async ctx => {
   const url = 'http://localhost:3000/authorization/orders'
-  const req = await axios.get(url)
+  const req = await axios.get(url, {
+    'headers': { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZGFpdmlldDE0MSIsImlhdCI6MTY0MjM1NDU5M30.3XqLv3JfT8vtNC66MhKN5ucX2xN-jwWDcKzZzaWn6ms' }
+  })
   return {
     ordersData: req.data
   }

@@ -34,7 +34,8 @@ const OrderList = ({ ordersData }) => {
     let orderDetail = await axios.get(url, {
       params: {
         orderId: orderId
-      }
+      },
+      'headers': { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZGFpdmlldDE0MSIsImlhdCI6MTY0MjM1NDU5M30.3XqLv3JfT8vtNC66MhKN5ucX2xN-jwWDcKzZzaWn6ms' }
     })
     billDetail = {
       id: bill.id[0],
