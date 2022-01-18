@@ -1,12 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
 import PageBanner from "../components/Layout/PageBanner";
 import OrderList from "../components/Manage/Orderlist";
 import axios from "axios";
+import { useToasts } from "react-toast-notifications";
+import { useRouter } from "next/router";
 
 
-const Manage = ({ ordersData }) => {
+
+const Manage = () => {
+  const { addToast } = useToasts();
+  const router = useRouter();
+  const [ordersData, setOrdersData] = useState([]);
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    const verifyTokenUrl = 'http://localhost:3000/api/verifyToken';
+    axios.get(verifyTokenUrl, {
+      params: {
+        token: token
+      }
+    }).then((res) => {
+      let isValid = res.data.status
+      if (isValid) {
+        const url = 'http://localhost:3000/authorization/orders'
+        axios.get(url, {
+          'headers': { 'Authorization': `Bearer ${token}` }
+        }).then((res) => {
+          setOrdersData(res.data)
+        })
+      }
+      else {
+        addToast("Bạn cần phải đăng nhập trước", { appearance: "error" });
+        router.push('/login')
+      }
+    })
+
+  }, [])
   return (
     <>
       <Header />
@@ -26,12 +56,3 @@ const Manage = ({ ordersData }) => {
 };
 
 export default Manage;
-Manage.getInitialProps = async ctx => {
-  const url = 'http://localhost:3000/authorization/orders'
-  const req = await axios.get(url, {
-    'headers': { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZGFpdmlldDE0MSIsImlhdCI6MTY0MjM1NDU5M30.3XqLv3JfT8vtNC66MhKN5ucX2xN-jwWDcKzZzaWn6ms' }
-  })
-  return {
-    ordersData: req.data
-  }
-}

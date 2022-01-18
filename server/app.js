@@ -23,8 +23,6 @@ app.use(cookieParser());
 
 function authenticateToken(req, res, next) {
   if (privatePaths.filter(p => {
-    console.log("p", p)
-    console.log("path", req.path.indexOf(p))
     return req.path.indexOf(p) >= 0
   }).length != 0) return next();
   const authHeader = req.headers['authorization']

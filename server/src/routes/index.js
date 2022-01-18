@@ -43,7 +43,6 @@ router.get('/category', async (req, res) => {
   return res.send(category.recordsets[0]);
 });
 router.get('/product', async (req, res) => {
-  console.log("run run run")
   const product = await db.query(`select * from Product`);
   return res.send(product.recordsets[0]);
 });
@@ -70,10 +69,10 @@ router.post('/login', async (req, res) => {
 })
 
 function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {})
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '3000s' })
 }
 router.get("/verifyToken", async (req, res) => {
-  const token = req.body.token
+  const token = req.query.token
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err) => {
     console.log(err)
     if (err) {
@@ -95,10 +94,6 @@ router.post('/customer', async (req, res) => {
   })
   let date = new Date()
   date = moment().format("YYYY-MM-DD HH:mm:ss")
-  console.log(`date`, date)
-  // console.log(`totalPrice`, totalPrice)
-
-  // console.log(cartData)
 
   const sqlInsertCustomer = `
   INSERT INTO quan_ly_cafe.dbo.Customer
@@ -113,12 +108,10 @@ router.post('/customer', async (req, res) => {
   let customerData = await db.query(sqlCheckCustomer)
   if (customerData.rowsAffected[0] > 0) {
     idCustomer = customerData.recordset[0].id
-    console.log("id", idCustomer)
   } else {
     await db.query(sqlInsertCustomer);
     customerData = await db.query(sqlCheckCustomer)
     idCustomer = customerData.recordset[0].id
-    console.log("id", idCustomer)
   }
   const sqlInsertOrders = `
   INSERT INTO quan_ly_cafe.dbo.Orders

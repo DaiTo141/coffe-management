@@ -29,13 +29,13 @@ const OrderList = ({ ordersData }) => {
   }
   const openModal = async (bill) => {
     let orderId = bill.id[0];
-
+    let token = localStorage.getItem("token");
     let url = `http://localhost:3000/authorization/order-detail`
     let orderDetail = await axios.get(url, {
       params: {
         orderId: orderId
       },
-      'headers': { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZGFpdmlldDE0MSIsImlhdCI6MTY0MjM1NDU5M30.3XqLv3JfT8vtNC66MhKN5ucX2xN-jwWDcKzZzaWn6ms' }
+      'headers': { 'Authorization': `Bearer ${token}` }
     })
     billDetail = {
       id: bill.id[0],
@@ -66,9 +66,9 @@ const OrderList = ({ ordersData }) => {
           <tbody style={{
             "cursor": "pointer"
           }}>
-            {ordersData.map((bill) => {
+            {ordersData.map((bill, index) => {
               return (
-                <tr key={bill.id} onClick={() => openModal(bill)}>
+                <tr key={index} onClick={() => openModal(bill)}>
                   <td className="product-name">
                     <p>{bill.fullname}</p>
                   </td>
@@ -101,6 +101,7 @@ const OrderList = ({ ordersData }) => {
           isOpen={modal}
           onRequestClose={closeModal}
           style={customStyles}
+          ariaHideApp={false}
           contentLabel="Example Modal"
         >
           <div className="order-details">
@@ -117,8 +118,8 @@ const OrderList = ({ ordersData }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {productsDetail.products.map((prt) => (
-                    <tr>
+                  {productsDetail.products.map((prt, index) => (
+                    <tr key={index}>
                       <td className="product-name">
                         <span className="subtotal-amount">{prt.name}</span>
                       </td>
