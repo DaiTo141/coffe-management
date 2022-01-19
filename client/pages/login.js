@@ -32,7 +32,8 @@ const Login = () => {
   const onSubmit = async (e) => {
     // e.preventDefault();
     // console.log(`e`, e)
-    let response = await axios.post("http://localhost:3000/api/login", {
+    let serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
+    let response = await axios.post(`${serverUrl}/api/login`, {
       username: e.username,
       password: e.password
     })

@@ -30,7 +30,8 @@ const OrderList = ({ ordersData }) => {
   const openModal = async (bill) => {
     let orderId = bill.id[0];
     let token = localStorage.getItem("token");
-    let url = `http://localhost:3000/authorization/order-detail`
+    let serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
+    let url = `${serverUrl}/authorization/order-detail`
     let orderDetail = await axios.get(url, {
       params: {
         orderId: orderId

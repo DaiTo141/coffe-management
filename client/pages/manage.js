@@ -14,8 +14,9 @@ const Manage = () => {
   const router = useRouter();
   const [ordersData, setOrdersData] = useState([]);
   useEffect(() => {
+    let serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
     let token = localStorage.getItem("token");
-    const verifyTokenUrl = 'http://localhost:3000/api/verifyToken';
+    const verifyTokenUrl = `${serverUrl}/api/verifyToken`;
     axios.get(verifyTokenUrl, {
       params: {
         token: token
@@ -23,7 +24,8 @@ const Manage = () => {
     }).then((res) => {
       let isValid = res.data.status
       if (isValid) {
-        const url = 'http://localhost:3000/authorization/orders'
+
+        const url = `${serverUrl}/authorization/orders`
         axios.get(url, {
           'headers': { 'Authorization': `Bearer ${token}` }
         }).then((res) => {

@@ -50,7 +50,8 @@ const Checkout = () => {
     reset();
   };
   const createCustomer = async (info) => {
-    const url = 'http://localhost:3000/api/customer'
+    let serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
+    const url = `${serverUrl}/api/customer`
     await axios.post(url, info)
   }
   let totalmoney = 20000;
