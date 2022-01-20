@@ -2147,21 +2147,21 @@ Cart CSS
   color: #6084a4;
 }
 
-.cart-table .widget {
+ .widget {
   margin-bottom: 30px;
 }
 
-.cart-table .widget_search form {
+ .widget_search form {
   position: relative;
 }
 
-.cart-table .widget_search form label {
+ .widget_search form label {
   margin-bottom: 0;
 }
 
-.cart-table .widget_search form #search-field {
+ .widget_search form #search-field {
   background-color: transparent;
-  height: 50px !important;
+  height: 50px;
   padding: 6px 15px;
   border: 1px solid #eeeeee;
   /* width: 100%; */
@@ -2171,30 +2171,17 @@ Cart CSS
   transition: 0.5s;
 }
 
-.cart-table .widget_search form #search-field {
-  background-color: transparent;
-  height: 50px;
-  padding: 6px 15px;
-  border: 1px solid #eeeeee;
-  width: 100%;
-  display: block;
-  outline: 0;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-}
-
-.cart-table .widget_search form #search-field:focus {
+ .widget_search form #search-field:focus {
   border-color: #44ce6f;
 }
 
-.cart-table .widget_search form button {
+ .widget_search form button {
   position: relative;
-  /* left: 0;
+  left: 0;
   outline: 0;
-  bottom: 0; */
+  bottom: 5px;
   height: 50px;
   width: 50px;
-  z-index: 1;
   border: none;
   cursor: pointer;
   color: #ffffff;
@@ -2205,7 +2192,7 @@ Cart CSS
   margin-top: -5px;
 }
 
-.cart-table .widget_search form button svg {
+ .widget_search form button svg {
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);

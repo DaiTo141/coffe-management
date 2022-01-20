@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import * as Icon from "react-feather";
 import { BillData, ProductData } from "./BillData";
 import Modal from "react-modal";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
-import { addDays, vi } from "date-fns";
-import { DateRangePicker } from "react-date-range";
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
 const customStyles = {
   content: {
     top: "50%",
@@ -82,15 +77,6 @@ const OrderList = ({ ordersData }) => {
   };
   //
 
-  //For date picker
-  const [state, setState] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
-
   //For search input
   const handleSearch = (e) => {
     console.log("input", e.target.value);
@@ -98,39 +84,25 @@ const OrderList = ({ ordersData }) => {
 
   return (
     <>
-      <div className="cart-table table-responsive ptb-80">
-        <div className="row">
-          <div className="widget widget_search">
-            <form className="search-form">
-              <label>
-                <input
-                  type="search"
-                  id="search-field"
-                  name="search"
-                  placeholder="Tìm kiếm theo email"
-                  onChange={handleSearch}
-                />
-              </label>
-              <button type="submit" onClick={(e) => onSubmit(e, input)}>
-                <Icon.Search />
-              </button>
-            </form>
-          </div>
-          <div className="date-range">
-            <DateRangePicker
-              onChange={(item) => setState([item.selection])}
-              // showSelectionPreview={true}
-              // moveRangeOnFirstSelection={false}
-              months={2}
-              ranges={state}
-              maxDate={new Date()}
-              direction="horizontal"
-              // preventSnapRefocus={true}
-              // calendarFocus="backwards"
-            />
-          </div>
+      <div className="row">
+        <div className="widget widget_search">
+          <form className="search-form">
+            <label>
+              <input
+                type="search"
+                id="search-field"
+                name="search"
+                placeholder="Tìm kiếm theo email"
+                onChange={handleSearch}
+              />
+            </label>
+            <button type="submit" onClick={(e) => onSubmit(e, input)}>
+              <Icon.Search />
+            </button>
+          </form>
         </div>
-
+      </div>
+      <div className="cart-table table-responsive pb-80">
         <table className="table table-bordered">
           <thead>
             <tr>
