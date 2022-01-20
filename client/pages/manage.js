@@ -7,38 +7,39 @@ import axios from "axios";
 import { useToasts } from "react-toast-notifications";
 import { useRouter } from "next/router";
 
-
-
 const Manage = () => {
   const { addToast } = useToasts();
   const router = useRouter();
   const [ordersData, setOrdersData] = useState([]);
+
   useEffect(() => {
-    let serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
+    let serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
     let token = localStorage.getItem("token");
     const verifyTokenUrl = `${serverUrl}/api/verifyToken`;
-    axios.get(verifyTokenUrl, {
-      params: {
-        token: token
-      }
-    }).then((res) => {
-      let isValid = res.data.status
-      if (isValid) {
+    axios
+      .get(verifyTokenUrl, {
+        params: {
+          token: token,
+        },
+      })
+      .then((res) => {
+        let isValid = res.data.status;
+        if (isValid) {
+          const url = `${serverUrl}/authorization/orders`;
+          axios
+            .get(url, {
+              headers: { Authorization: `Bearer ${token}` },
+            })
+            .then((res) => {
+              setOrdersData(res.data);
+            });
+        } else {
+          addToast("Bạn cần phải đăng nhập trước", { appearance: "error" });
+          router.push("/login");
+        }
+      });
+  }, []);
 
-        const url = `${serverUrl}/authorization/orders`
-        axios.get(url, {
-          'headers': { 'Authorization': `Bearer ${token}` }
-        }).then((res) => {
-          setOrdersData(res.data)
-        })
-      }
-      else {
-        addToast("Bạn cần phải đăng nhập trước", { appearance: "error" });
-        router.push('/login')
-      }
-    })
-
-  }, [])
   return (
     <>
       <Header />

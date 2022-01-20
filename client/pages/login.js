@@ -14,30 +14,30 @@ const MySwal = withReactContent(Swal);
 const Login = () => {
   const router = useRouter();
   const [isLogin, setLogin] = useState(false);
-
+  let username = "";
+  let password = "";
   const { handleSubmit, register } = useForm();
-  const alertContent = (e) => {
-    if (isLogin) {
+
+  const alertContent = () => {
       MySwal.fire({
         title: "Thành công",
-        text: `Bạn đã đăng nhập với USERNAME là: ${e.username} PASSWORD là: ${e.password}`,
+        text: `Bạn đã đăng nhập thành công`,
         icon: "success",
         // timer: 5000,
         timerProgressBar: true,
         showConfirmButton: true,
       });
-    } else console.log("hello");
   };
 
   const onSubmit = async (e) => {
     // e.preventDefault();
-    // console.log(`e`, e)
-    let serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
+
+    let serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
     let response = await axios.post(`${serverUrl}/api/login`, {
-      username: e.username,
-      password: e.password
-    })
-    let data = response.data
+      username: username,
+      password: password,
+    });
+    let data = response.data;
     if (data.errorMessage) {
       MySwal.fire({
         title: "Thất bại",
@@ -47,17 +47,21 @@ const Login = () => {
         timerProgressBar: true,
         showConfirmButton: true,
       });
-    }
-    else {
-      localStorage.setItem("token", data.accessToken)
-      router.push('/manage')
+    } else {
+      alertContent()
+      localStorage.setItem("token", data.accessToken);
+      router.push("/manage");
     }
   };
 
-  const userType = () => {
-    setLogin(true);
-    //Cho nay set bi cham 1 nhip
+  const handleUsername = (e) => {
+    username = e.target.value;
   };
+
+  const handlePassword = (e) => {
+    password = e.target.value;
+  };
+
   return (
     <>
       <Header />
@@ -73,9 +77,6 @@ const Login = () => {
                   <img src="../images/coffee-logo.png" />
                 </a>
               </Link>
-              {/* <p>
-                Don't have an account yet? <Link href="/sign-up">Sign Up</Link>
-              </p> */}
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -87,7 +88,7 @@ const Login = () => {
                   className="form-control"
                   id="exampleInputEmail1"
                   {...register("username")}
-                  onChange={userType}
+                  onChange={handleUsername}
                 />
               </div>
 
@@ -99,43 +100,14 @@ const Login = () => {
                   className="form-control"
                   id="exampleInputPassword1"
                   {...register("password")}
-                  onChange={userType}
+                  onChange={handlePassword}
                 />
               </div>
-
-              {/* <div className="mb-3">
-                <p>
-                  <Link href="/forgot-password">
-                    <a>Forgot Password</a>
-                  </Link>
-                </p>
-              </div> */}
 
               <button type="submit" className="btn btn-primary">
                 Login
               </button>
             </form>
-            {/* 
-            <div className="foot">
-              <p>or connect with</p>
-              <ul>
-                <li>
-                  <a href="#" target="_blank">
-                    <Icon.Mail />
-                  </a>
-                </li>
-                <li>
-                  <a href="#" target="_blank">
-                    <Icon.Facebook />
-                  </a>
-                </li>
-                <li>
-                  <a href="#" target="_blank">
-                    <Icon.Twitter />
-                  </a>
-                </li>
-              </ul>
-            </div> */}
           </div>
         </div>
       </div>
