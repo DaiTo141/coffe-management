@@ -18,7 +18,7 @@ const Menu = () => {
       type: "FILTER_PRODUCT",
       param: param
     })
-    addToast("Filter Product Successfully", { appearance: "success" });
+    addToast("Chọn loại sản phẩm thành công", { appearance: "success" });
   }
   return (
     <>
