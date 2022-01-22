@@ -26,6 +26,7 @@ const OrderList = ({ ordersData }) => {
   const [items, setItems] = useState(ordersData);
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
+  const [searchKey, setSearchKey] = useState("")
 
   const itemsPerPage = 8;
   const [itemOffset, setItemOffset] = useState(0);
@@ -44,6 +45,11 @@ const OrderList = ({ ordersData }) => {
   useEffect(() => {
     setItems(ordersData);
   });
+
+  useEffect(() => {
+    console.log('searchKey', searchKey);
+    let url = `${serverUrl}/api/`
+  }, [searchKey])
   //======================================//
 
   //For modal
@@ -80,7 +86,7 @@ const OrderList = ({ ordersData }) => {
 
   //For search input
   const handleSearch = (e) => {
-    console.log("input", e.target.value);
+    setSearchKey(e.target.value)
   };
 
   //==================================//
