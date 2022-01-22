@@ -4,6 +4,9 @@ import { BillData, ProductData } from "./BillData";
 import Modal from "react-modal";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
+import DateRangePicker from "@wojtekmaj/react-daterange-picker/dist/entry.nostyle";
+import { setDate } from "date-fns";
+
 const customStyles = {
   content: {
     top: "50%",
@@ -30,9 +33,7 @@ const OrderList = ({ ordersData }) => {
     const newOffset = (event.selected * itemsPerPage) % items.length;
     setItemOffset(newOffset);
   };
-  //
 
-  //For paginate
   useEffect(() => {
     // Fetch items from another resources.
     const endOffset = itemOffset + itemsPerPage;
@@ -43,7 +44,7 @@ const OrderList = ({ ordersData }) => {
   useEffect(() => {
     setItems(ordersData);
   });
-  //
+  //======================================//
 
   //For modal
   const [modal, setModal] = useState(false);
@@ -75,17 +76,22 @@ const OrderList = ({ ordersData }) => {
   const closeModal = () => {
     setModal(false);
   };
-  //
+  //===================================//
 
   //For search input
   const handleSearch = (e) => {
     console.log("input", e.target.value);
   };
 
+  //==================================//
+
+  //For DateRangePicker
+  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+
   return (
     <>
       <div className="row">
-        <div className="widget widget_search">
+        <div className="widget widget_search col-lg-4">
           <form className="search-form">
             <label>
               <input
@@ -100,6 +106,11 @@ const OrderList = ({ ordersData }) => {
               <Icon.Search />
             </button>
           </form>
+        </div>
+        <div className="col-lg-5"></div>
+        <div className="widget_date_range col-lg-3">
+          {" "}
+          <DateRangePicker onChange={setDateRange} value={dateRange} />
         </div>
       </div>
       <div className="cart-table table-responsive pb-80">
