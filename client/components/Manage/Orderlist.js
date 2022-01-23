@@ -20,7 +20,7 @@ const customStyles = {
 let billDetail = BillData[0];
 let productsDetail = ProductData[0];
 
-const OrderList = ({ ordersData }) => {
+const OrderList = ({ ordersData, getSearchKey }) => {
   //For paginate
 
   const [items, setItems] = useState(ordersData);
@@ -46,11 +46,6 @@ const OrderList = ({ ordersData }) => {
     setItems(ordersData);
   });
 
-  useEffect(() => {
-    console.log('searchKey', searchKey);
-    let url = `${serverUrl}/api/`
-  }, [searchKey])
-  //======================================//
 
   //For modal
   const [modal, setModal] = useState(false);
@@ -87,6 +82,7 @@ const OrderList = ({ ordersData }) => {
   //For search input
   const handleSearch = (e) => {
     setSearchKey(e.target.value)
+    getSearchKey(e.target.value)
   };
 
   //==================================//
@@ -113,8 +109,8 @@ const OrderList = ({ ordersData }) => {
             </button>
           </form>
         </div>
-        <div className="col-lg-5"></div>
-        <div className="widget_date_range col-lg-3">
+        <div className="col-lg-4"></div>
+        <div className="widget_date_range col-lg-4">
           {" "}
           <DateRangePicker onChange={setDateRange} value={dateRange} />
         </div>
@@ -199,6 +195,7 @@ const OrderList = ({ ordersData }) => {
           <div className="order-details">
             <h3 className="title">Đơn hàng số: {billDetail.id}</h3>
             <h4>Tên khách hàng: {billDetail.name}</h4>
+            <h4>Ghi chú: {billDetail.notes}</h4>
             <div className="order-table table-responsive">
               <table className="table table-bordered">
                 <thead>

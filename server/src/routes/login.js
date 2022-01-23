@@ -28,6 +28,11 @@ router.get("/order-detail", async (req, res) => {
 })
 router.get("/orders", async (req, res) => {
   const orders = await db.query(`select * from Orders o, Customer c WHERE o.customer_id  = c.id `);
+  let keySeach = req.query.search
+  if (keySeach) {
+    const orders_search = await db.query(`select * from Orders o, Customer c WHERE o.customer_id  = c.id AND c.email like '%${keySeach}%' `)
+    return res.send(orders_search.recordsets[0])
+  }
   return res.send(orders.recordsets[0])
 })
 module.exports = router

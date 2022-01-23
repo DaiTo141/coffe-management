@@ -39,7 +39,18 @@ const Manage = () => {
         }
       });
   }, []);
-
+  const getSearchKey = async (key) => {
+    let token = localStorage.getItem("token");
+    let serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+    let url = `${serverUrl}/authorization/orders`
+    let orderSearch = await axios.get(url, {
+      params: {
+        search: key
+      },
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    setOrdersData(orderSearch.data)
+  }
   return (
     <>
       <Header />
@@ -48,7 +59,7 @@ const Manage = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 col-md-12">
-              <OrderList ordersData={ordersData} />
+              <OrderList ordersData={ordersData} getSearchKey={(x) => getSearchKey(x)} />
             </div>
           </div>
         </div>
