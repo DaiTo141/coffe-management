@@ -6,6 +6,7 @@ import OrderList from "../components/Manage/Orderlist";
 import axios from "axios";
 import { useToasts } from "react-toast-notifications";
 import { useRouter } from "next/router";
+import moment from "moment"
 
 const Manage = () => {
   const { addToast } = useToasts();
@@ -51,6 +52,22 @@ const Manage = () => {
     })
     setOrdersData(orderSearch.data)
   }
+  const getFilterTime = async (time) => {
+    const start = moment(time[0]).format("YYYY-MM-DD")
+    const end = moment(time[1]).format("YYYY-MM-DD")
+    let token = localStorage.getItem("token");
+    let serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+    let url = `${serverUrl}/authorization/orders`
+    let orderFilterTime = await axios.get(url, {
+      params: {
+        isFilterTime: true,
+        filterTimeStart: start,
+        filterTimeEnd: end,
+      },
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    setOrdersData(orderFilterTime.data)
+  }
   return (
     <>
       <Header />
@@ -59,7 +76,7 @@ const Manage = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 col-md-12">
-              <OrderList ordersData={ordersData} getSearchKey={(x) => getSearchKey(x)} />
+              <OrderList ordersData={ordersData} getSearchKey={(x) => getSearchKey(x)} getFilterTime={(time) => getFilterTime(time)} />
             </div>
           </div>
         </div>

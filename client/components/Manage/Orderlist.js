@@ -20,7 +20,7 @@ const customStyles = {
 let billDetail = BillData[0];
 let productsDetail = ProductData[0];
 
-const OrderList = ({ ordersData, getSearchKey }) => {
+const OrderList = ({ ordersData, getSearchKey, getFilterTime }) => {
   //For paginate
 
   const [items, setItems] = useState(ordersData);
@@ -89,7 +89,11 @@ const OrderList = ({ ordersData, getSearchKey }) => {
 
   //For DateRangePicker
   const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+  const getDateRange = (x) => {
+    setDateRange(x)
+    getFilterTime(x)
 
+  }
   return (
     <>
       <div className="row">
@@ -112,7 +116,7 @@ const OrderList = ({ ordersData, getSearchKey }) => {
         <div className="col-lg-4"></div>
         <div className="widget_date_range col-lg-4">
           {" "}
-          <DateRangePicker onChange={setDateRange} value={dateRange} />
+          <DateRangePicker onChange={getDateRange} value={dateRange} maxDate={new Date()} />
         </div>
       </div>
       <div className="cart-table table-responsive pb-80">
@@ -195,7 +199,6 @@ const OrderList = ({ ordersData, getSearchKey }) => {
           <div className="order-details">
             <h3 className="title">Đơn hàng số: {billDetail.id}</h3>
             <h4>Tên khách hàng: {billDetail.name}</h4>
-            <h4>Ghi chú: {billDetail.notes}</h4>
             <div className="order-table table-responsive">
               <table className="table table-bordered">
                 <thead>

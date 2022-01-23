@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 var dotenv = require('dotenv');
 var jwt = require('jsonwebtoken');
+var moment = require("moment")
 const db = require('../../connection');
 dotenv.config()
 router.get("/order-detail", async (req, res) => {
   let orderId = req.query.orderId
   let order_detail = await db.query(`select * from OrderDetail od WHERE od.order_id = ${orderId}`)
-  // console.log(order_detail)
   let response = {
     products: []
   }
@@ -29,9 +29,23 @@ router.get("/order-detail", async (req, res) => {
 router.get("/orders", async (req, res) => {
   const orders = await db.query(`select * from Orders o, Customer c WHERE o.customer_id  = c.id `);
   let keySeach = req.query.search
+  let isFilterTime = req.query.isFilterTime
   if (keySeach) {
     const orders_search = await db.query(`select * from Orders o, Customer c WHERE o.customer_id  = c.id AND c.email like '%${keySeach}%' `)
     return res.send(orders_search.recordsets[0])
+  }
+  else if (isFilterTime) {
+    let filterTimeStart = req.query.filterTimeStart
+    let filterTimeEnd = req.query.filterTimeEnd
+    let start = moment(filterTimeStart).format("YYYY-MM-DD")
+    let end = moment(filterTimeEnd).format("YYYY-MM-DD")
+    const orders_filterTime = await db.query(`
+    select * from Orders o, Customer c
+    where  o.order_date  BETWEEN '${start}' AND '${end}'
+    AND o.customer_id =c.id `)
+    return res.send(
+      orders_filterTime.recordsets[0]
+    )
   }
   return res.send(orders.recordsets[0])
 })
